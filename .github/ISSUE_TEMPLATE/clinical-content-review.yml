@@ -1,0 +1,53 @@
+name: 临床内容审核
+description: 跟踪评估、红旗、规则、处方或测试病例的治疗师审核
+title: "[临床审核] "
+labels: ["clinical-review"]
+body:
+  - type: dropdown
+    id: content-type
+    attributes:
+      label: 内容类型
+      options:
+        - 评估定义
+        - 红旗或安全路径
+        - F0-F5 功能分级
+        - 决策规则
+        - 标准处方
+        - 金标准测试病例
+    validations:
+      required: true
+  - type: input
+    id: content-id
+    attributes:
+      label: 内容 ID 与版本
+      placeholder: "例如 RULE-GLOBAL-SAFETY-UNKNOWN@0.1.0-draft"
+    validations:
+      required: true
+  - type: textarea
+    id: review-scope
+    attributes:
+      label: 审核范围
+      description: 说明适用范围、安全边界、证据、剂量或测试覆盖。
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 安全确认
+      options:
+        - label: 已核对红旗、禁忌证和终止标准
+          required: true
+        - label: 已核对正例、反例、边界和安全阻断测试
+          required: true
+        - label: 内容不构成自动诊断，且仍需治疗师签发
+          required: true
+  - type: dropdown
+    id: decision
+    attributes:
+      label: 审核结论
+      options:
+        - 需要修改
+        - 拒绝
+        - 批准（仍需提交结构化审核记录）
+    validations:
+      required: true

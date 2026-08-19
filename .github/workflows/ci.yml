@@ -1,0 +1,42 @@
+name: CARE-Rx safety checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate clinical data and safety prototype
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate clinical data contracts
+        shell: pwsh
+        run: .\scripts\validate-clinical-data.ps1
+
+      - name: Run zero-dependency prototype tests
+        shell: pwsh
+        run: .\scripts\test-prototype.ps1
+
+      - name: Confirm no clinical JSON is marked approved
+        shell: pwsh
+        run: |
+          $matches = Get-ChildItem clinical-data,test-cases -Recurse -File -Filter *.json |
+            Select-String -Pattern '"status"\s*:\s*"approved"','"reviewStatus"\s*:\s*"approved"','"decision"\s*:\s*"approved"'
+          if ($matches) {
+            $matches | ForEach-Object { Write-Error $_ }
+            throw 'Clinical JSON contains approved content without a committed review workflow.'
+          }
