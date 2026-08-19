@@ -1,0 +1,15 @@
+# Repository-wide review owner
+* @jie920199-code
+
+# Clinical content and its safety tests always request owner review
+/clinical-data/ @jie920199-code
+/test-cases/anonymized/ @jie920199-code
+/docs/CLINICAL_FRAMEWORK.md @jie920199-code
+/docs/CLINICAL_REVIEW_CHECKLIST.md @jie920199-code
+/docs/SAFETY_MODEL.md @jie920199-code
+
+# Security-sensitive runtime and automation
+/src/rule-engine/ @jie920199-code
+/src/application/ @jie920199-code
+/.github/workflows/ @jie920199-code
+/scripts/ @jie920199-code
