@@ -27,6 +27,7 @@ CARE-Rx 依据安全状态、功能等级、核心功能问题、康复潜力和
 - [局域网威胁模型](docs/THREAT_MODEL.md)
 - [局域网部署检查清单](docs/LAN_DEPLOYMENT_CHECKLIST.md)
 - [最小安全原型](docs/PROTOTYPE.md)
+- [GitHub协作与发布流程](docs/GITHUB_WORKFLOW.md)
 
 ## 目录约定
 
