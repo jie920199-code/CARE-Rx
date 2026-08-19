@@ -2,12 +2,29 @@
   "name": "care-rx",
   "version": "0.1.0-prototype",
   "private": true,
-  "description": "CARE-Rx zero-dependency safety prototype; not for clinical use",
+  "description": "CARE-Rx functional rehabilitation clinical decision support prototype; not for clinical use",
   "type": "module",
   "scripts": {
-    "test:prototype": "node --test tests/prototype/*.test.mjs"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test:prototype": "node --test tests/prototype/*.test.mjs",
+    "check": "pnpm typecheck && pnpm test:prototype && pnpm build"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@11.19.0",
+  "dependencies": {
+    "next": "16.3.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "26.2.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "typescript": "7.0.2"
   }
 }
