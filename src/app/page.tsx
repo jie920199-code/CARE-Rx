@@ -28,6 +28,7 @@ export default function HomePage() {
         <div className="environmentBadge">
           <span aria-hidden="true" /> 原型环境 · 不可用于临床
         </div>
+        <a className="loginLink" href="/login">治疗师登录</a>
       </header>
 
       <section className="hero" id="top">

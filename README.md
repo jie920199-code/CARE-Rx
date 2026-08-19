@@ -28,6 +28,7 @@ CARE-Rx 依据安全状态、功能等级、核心功能问题、康复潜力和
 - [局域网部署检查清单](docs/LAN_DEPLOYMENT_CHECKLIST.md)
 - [最小安全原型](docs/PROTOTYPE.md)
 - [Next.js应用骨架](docs/APP_SKELETON.md)
+- [网页登录与临时会话](docs/AUTHENTICATION.md)
 - [GitHub协作与发布流程](docs/GITHUB_WORKFLOW.md)
 
 ## 目录约定
