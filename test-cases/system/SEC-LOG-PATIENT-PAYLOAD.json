@@ -1,0 +1,8 @@
+{
+  "systemTestId": "SEC-LOG-PATIENT-PAYLOAD",
+  "synthetic": true,
+  "area": "logging",
+  "given": { "eventContainsPatientPayload": true },
+  "when": { "event": "write_application_log" },
+  "expected": { "result": "rejected_or_redacted", "patientPayloadWrittenToLog": false }
+}

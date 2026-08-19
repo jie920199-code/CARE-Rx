@@ -1,0 +1,32 @@
+# Dependencies and build output
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Local patient/runtime data — never commit
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+data/
+backups/
+exports/
+uploads/
+logs/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Codex working/output areas
+work/
+outputs/

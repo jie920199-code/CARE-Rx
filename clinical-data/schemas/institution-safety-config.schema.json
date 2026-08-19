@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://care-rx.local/schemas/institution-safety-config.schema.json",
+  "title": "Institution-approved escalation configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["configId", "version", "status", "institutionLabel", "emergency", "nonEmergencyReferral", "offlineFallback", "clinicalReview"],
+  "properties": {
+    "configId": { "type": "string", "pattern": "^SAFETY-CONFIG-[A-Z0-9-]+$" },
+    "version": { "type": "string" },
+    "status": { "enum": ["draft", "approved", "retired"] },
+    "institutionLabel": { "type": "string" },
+    "emergency": { "$ref": "#/$defs/pathway" },
+    "nonEmergencyReferral": { "$ref": "#/$defs/pathway" },
+    "offlineFallback": { "$ref": "#/$defs/pathway" },
+    "clinicalReview": { "type": "object", "required": ["status"], "properties": { "status": { "enum": ["pending_clinical_review", "approved"] }, "reviewerUserId": { "type": ["string", "null"] }, "reviewedAt": { "type": ["string", "null"], "format": "date-time" } } }
+  },
+  "$defs": {
+    "pathway": {
+      "type": "object",
+      "required": ["displayText", "contacts", "responseTarget", "reviewStatus"],
+      "properties": {
+        "displayText": { "type": "string" },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["role", "contactMethod"],
+            "properties": {
+              "role": { "type": "string" },
+              "contactMethod": { "type": "string" }
+            }
+          }
+        },
+        "responseTarget": { "type": "string" },
+        "reviewStatus": { "enum": ["pending_clinical_review", "approved"] }
+      }
+    }
+  }
+}

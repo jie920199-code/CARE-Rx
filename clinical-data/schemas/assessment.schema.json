@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://care-rx.local/schemas/assessment.schema.json",
+  "title": "CARE-Rx transient functional assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["assessmentId", "schemaVersion", "synthetic", "performedAt", "assessorUserId", "safetyScreen", "functionalEvidence", "problems", "goalModes", "careContext", "clinicalReviewStatus"],
+  "properties": {
+    "assessmentId": { "type": "string", "pattern": "^ASM-[A-Z0-9-]+$" },
+    "schemaVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "synthetic": { "const": true },
+    "performedAt": { "type": "string", "format": "date-time" },
+    "assessorUserId": { "type": "string", "minLength": 1 },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ephemeralId": { "type": "string", "pattern": "^TMP-[A-Z0-9-]+$" },
+        "ageBand": { "enum": ["65-74", "75-84", "85-plus", "unknown"] },
+        "sex": { "enum": ["female", "male", "unspecified", "unknown"] }
+      },
+      "required": ["ephemeralId", "ageBand", "sex"]
+    },
+    "safetyScreen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["screenVersion", "items", "outcome"],
+      "properties": {
+        "screenVersion": { "type": "string" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["itemId", "answer", "reviewStatus"],
+            "properties": {
+              "itemId": { "type": "string", "pattern": "^SF-[A-Z0-9-]+$" },
+              "answer": { "enum": ["yes", "no", "unknown", "not_assessed"] },
+              "reviewStatus": { "enum": ["pending_clinical_review", "approved"] }
+            }
+          }
+        },
+        "outcome": { "enum": ["safety_blocked", "needs_information", "eligible_for_matching"] }
+      }
+    },
+    "functionalEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domains", "provisionalLevel", "therapistConfirmationRequired"],
+      "properties": {
+        "domains": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["domainId", "value"],
+            "properties": {
+              "domainId": { "type": "string" },
+              "value": { "type": ["string", "number", "boolean", "null"] }
+            }
+          }
+        },
+        "provisionalLevel": { "enum": ["F0", "F1", "F2", "F3", "F4", "F5", "undetermined"] },
+        "therapistConfirmationRequired": { "const": true }
+      }
+    },
+    "problems": { "type": "array", "minItems": 1, "items": { "type": "object", "required": ["moduleId", "role"], "properties": { "moduleId": { "enum": ["M01", "M07", "M08"] }, "role": { "enum": ["primary", "secondary"] } } } },
+    "goalModes": {
+      "type": "object",
+      "required": ["primary", "secondary"],
+      "properties": {
+        "primary": { "enum": ["P", "M", "R", "C", "H"] },
+        "secondary": { "type": "array", "uniqueItems": true, "items": { "enum": ["P", "M", "R", "C", "H"] } }
+      }
+    },
+    "careContext": { "type": "object", "required": ["staffing", "equipment", "environment"], "properties": { "staffing": { "type": "array", "items": { "type": "string" } }, "equipment": { "type": "array", "items": { "type": "string" } }, "environment": { "type": "array", "items": { "type": "string" } } } },
+    "clinicalReviewStatus": { "enum": ["pending_clinical_review", "approved"] }
+  }
+}

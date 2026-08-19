@@ -1,0 +1,8 @@
+{
+  "systemTestId": "SEC-EXPORT-UNAPPROVED-CONTENT",
+  "synthetic": true,
+  "area": "export",
+  "given": { "therapistConfirmed": true, "allPrescriptionVersionsApproved": false },
+  "when": { "event": "request_export", "audience": "caregiver" },
+  "expected": { "result": "denied", "reasonCode": "CLINICAL_CONTENT_NOT_APPROVED", "artifactCreated": false }
+}

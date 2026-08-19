@@ -1,0 +1,41 @@
+{
+  "testCaseId": "TC-M01-NOT-ASSESSED-SAFETY",
+  "version": "0.1.0-draft",
+  "synthetic": true,
+  "module": "M01",
+  "description": "虚构边界病例：必需安全项尚未评估，必须补充信息，不得把未评估当作阴性。",
+  "input": {
+    "assessmentId": "ASM-TC-M01-002",
+    "schemaVersion": "0.1.0",
+    "synthetic": true,
+    "performedAt": "2026-08-18T00:00:00Z",
+    "assessorUserId": "THERAPIST-TEST-01",
+    "subject": { "ephemeralId": "TMP-M01-002", "ageBand": "85-plus", "sex": "unspecified" },
+    "safetyScreen": {
+      "screenVersion": "0.1.0-draft",
+      "items": [
+        { "itemId": "SF-ACUTE-NEUROLOGICAL-CHANGE", "answer": "no", "reviewStatus": "pending_clinical_review" },
+        { "itemId": "SF-MEDICAL-INSTABILITY", "answer": "not_assessed", "reviewStatus": "pending_clinical_review" },
+        { "itemId": "SF-NEW-SEVERE-SYMPTOM", "answer": "no", "reviewStatus": "pending_clinical_review" }
+      ],
+      "outcome": "needs_information"
+    },
+    "functionalEvidence": {
+      "domains": [{ "domainId": "bed_mobility", "value": "not_assessed" }],
+      "provisionalLevel": "undetermined",
+      "therapistConfirmationRequired": true
+    },
+    "problems": [{ "moduleId": "M01", "role": "primary" }],
+    "goalModes": { "primary": "P", "secondary": ["M"] },
+    "careContext": { "staffing": [], "equipment": [], "environment": [] },
+    "clinicalReviewStatus": "pending_clinical_review"
+  },
+  "expected": {
+    "safetyOutcome": "needs_information",
+    "matchingOutcome": "needs_information",
+    "allowedPrescriptionIds": [],
+    "excludedPrescriptionIds": [],
+    "rationaleCodes": ["SAFETY_REQUIRED_INFORMATION_MISSING"]
+  },
+  "clinicalReview": { "status": "pending_clinical_review" }
+}

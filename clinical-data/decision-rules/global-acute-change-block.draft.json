@@ -1,0 +1,12 @@
+{
+  "ruleId": "RULE-GLOBAL-ACUTE-CHANGE-BLOCK",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "priority": 2000,
+  "scope": ["GLOBAL_SAFETY"],
+  "when": { "any": [{ "fact": "safetyScreen.SF-ACUTE-NEUROLOGICAL-CHANGE", "operator": "equals", "value": "yes" }] },
+  "then": [{ "action": "blockAll", "reference": "institutionSafetyConfig.emergency" }],
+  "rationaleCode": "SAFETY_ACUTE_CHANGE_BLOCK",
+  "clinicalReview": { "status": "pending_clinical_review" },
+  "tests": ["TC-M08-ACUTE-CHANGE-BLOCK", "TC-M01-BASELINE-REVIEW"]
+}

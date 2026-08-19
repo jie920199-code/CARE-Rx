@@ -1,0 +1,44 @@
+{
+  "testCaseId": "TC-M01-BASELINE-REVIEW",
+  "version": "0.1.0-draft",
+  "synthetic": true,
+  "module": "M01",
+  "description": "虚构病例：床上活动受限且无已知红旗；由于功能阈值和处方尚未获批，只能进入治疗师复核。",
+  "input": {
+    "assessmentId": "ASM-TC-M01-001",
+    "schemaVersion": "0.1.0",
+    "synthetic": true,
+    "performedAt": "2026-08-18T00:00:00Z",
+    "assessorUserId": "THERAPIST-TEST-01",
+    "subject": { "ephemeralId": "TMP-M01-001", "ageBand": "85-plus", "sex": "unspecified" },
+    "safetyScreen": {
+      "screenVersion": "0.1.0-draft",
+      "items": [
+        { "itemId": "SF-ACUTE-NEUROLOGICAL-CHANGE", "answer": "no", "reviewStatus": "pending_clinical_review" },
+        { "itemId": "SF-MEDICAL-INSTABILITY", "answer": "no", "reviewStatus": "pending_clinical_review" },
+        { "itemId": "SF-NEW-SEVERE-SYMPTOM", "answer": "no", "reviewStatus": "pending_clinical_review" }
+      ],
+      "outcome": "eligible_for_matching"
+    },
+    "functionalEvidence": {
+      "domains": [
+        { "domainId": "bed_mobility_participation", "value": "limited_participation" },
+        { "domainId": "sitting_tolerance", "value": "not_assessed" }
+      ],
+      "provisionalLevel": "F1",
+      "therapistConfirmationRequired": true
+    },
+    "problems": [{ "moduleId": "M01", "role": "primary" }],
+    "goalModes": { "primary": "M", "secondary": ["P", "C"] },
+    "careContext": { "staffing": ["one_caregiver_available"], "equipment": ["standard_bed"], "environment": ["bedside_space_limited"] },
+    "clinicalReviewStatus": "pending_clinical_review"
+  },
+  "expected": {
+    "safetyOutcome": "eligible_for_matching",
+    "matchingOutcome": "needs_therapist_review",
+    "allowedPrescriptionIds": [],
+    "excludedPrescriptionIds": [],
+    "rationaleCodes": ["CLINICAL_CONTENT_NOT_APPROVED"]
+  },
+  "clinicalReview": { "status": "pending_clinical_review" }
+}

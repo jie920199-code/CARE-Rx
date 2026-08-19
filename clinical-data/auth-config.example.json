@@ -1,0 +1,26 @@
+{
+  "configId": "AUTH-CONFIG-EXAMPLE",
+  "version": "0.1.0-draft",
+  "passwordPolicy": {
+    "minimumLength": 12,
+    "blockCommonPasswords": true,
+    "storeUsingAdaptiveHash": true
+  },
+  "loginProtection": {
+    "rateLimitEnabled": true,
+    "genericFailureMessage": true,
+    "auditWithoutPatientData": true
+  },
+  "sessionPolicy": {
+    "idleTimeoutMinutes": 15,
+    "absoluteTimeoutMinutes": 120,
+    "secureCookie": true,
+    "httpOnlyCookie": true,
+    "sameSite": "strict",
+    "clearPatientSessionOnLogout": true
+  },
+  "transportPolicy": {
+    "httpsRequired": true,
+    "publicInternetExposureAllowed": false
+  }
+}

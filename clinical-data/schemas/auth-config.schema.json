@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://care-rx.local/schemas/auth-config.schema.json",
+  "title": "CARE-Rx local network authentication configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["configId", "version", "passwordPolicy", "loginProtection", "sessionPolicy", "transportPolicy"],
+  "properties": {
+    "configId": { "type": "string", "pattern": "^AUTH-CONFIG-[A-Z0-9-]+$" },
+    "version": { "type": "string" },
+    "passwordPolicy": {
+      "type": "object",
+      "required": ["minimumLength", "blockCommonPasswords", "storeUsingAdaptiveHash"],
+      "properties": {
+        "minimumLength": { "type": "integer", "minimum": 12 },
+        "blockCommonPasswords": { "const": true },
+        "storeUsingAdaptiveHash": { "const": true }
+      }
+    },
+    "loginProtection": {
+      "type": "object",
+      "required": ["rateLimitEnabled", "genericFailureMessage", "auditWithoutPatientData"],
+      "properties": {
+        "rateLimitEnabled": { "const": true },
+        "genericFailureMessage": { "const": true },
+        "auditWithoutPatientData": { "const": true }
+      }
+    },
+    "sessionPolicy": {
+      "type": "object",
+      "required": ["idleTimeoutMinutes", "absoluteTimeoutMinutes", "secureCookie", "httpOnlyCookie", "sameSite", "clearPatientSessionOnLogout"],
+      "properties": {
+        "idleTimeoutMinutes": { "type": "integer", "minimum": 5, "maximum": 60 },
+        "absoluteTimeoutMinutes": { "type": "integer", "minimum": 15, "maximum": 480 },
+        "secureCookie": { "const": true },
+        "httpOnlyCookie": { "const": true },
+        "sameSite": { "enum": ["strict", "lax"] },
+        "clearPatientSessionOnLogout": { "const": true }
+      }
+    },
+    "transportPolicy": {
+      "type": "object",
+      "required": ["httpsRequired", "publicInternetExposureAllowed"],
+      "properties": {
+        "httpsRequired": { "const": true },
+        "publicInternetExposureAllowed": { "const": false }
+      }
+    }
+  }
+}

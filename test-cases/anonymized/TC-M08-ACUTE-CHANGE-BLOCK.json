@@ -1,0 +1,41 @@
+{
+  "testCaseId": "TC-M08-ACUTE-CHANGE-BLOCK",
+  "version": "0.1.0-draft",
+  "synthetic": true,
+  "module": "M08",
+  "description": "虚构病例：既往脑卒中背景下报告新发神经功能变化；安全门必须阻断，具体机构处置路径待配置和临床审核。",
+  "input": {
+    "assessmentId": "ASM-TC-M08-001",
+    "schemaVersion": "0.1.0",
+    "synthetic": true,
+    "performedAt": "2026-08-18T00:00:00Z",
+    "assessorUserId": "THERAPIST-TEST-01",
+    "subject": { "ephemeralId": "TMP-M08-001", "ageBand": "75-84", "sex": "unspecified" },
+    "safetyScreen": {
+      "screenVersion": "0.1.0-draft",
+      "items": [
+        { "itemId": "SF-ACUTE-NEUROLOGICAL-CHANGE", "answer": "yes", "reviewStatus": "pending_clinical_review" },
+        { "itemId": "SF-MEDICAL-INSTABILITY", "answer": "unknown", "reviewStatus": "pending_clinical_review" },
+        { "itemId": "SF-NEW-SEVERE-SYMPTOM", "answer": "yes", "reviewStatus": "pending_clinical_review" }
+      ],
+      "outcome": "safety_blocked"
+    },
+    "functionalEvidence": {
+      "domains": [{ "domainId": "motor_change", "value": "new_change_reported" }],
+      "provisionalLevel": "undetermined",
+      "therapistConfirmationRequired": true
+    },
+    "problems": [{ "moduleId": "M08", "role": "primary" }],
+    "goalModes": { "primary": "H", "secondary": [] },
+    "careContext": { "staffing": ["caregiver_present"], "equipment": [], "environment": ["institution_room"] },
+    "clinicalReviewStatus": "pending_clinical_review"
+  },
+  "expected": {
+    "safetyOutcome": "safety_blocked",
+    "matchingOutcome": "blocked",
+    "allowedPrescriptionIds": [],
+    "excludedPrescriptionIds": [],
+    "rationaleCodes": ["SAFETY_ACUTE_CHANGE_BLOCK", "INSTITUTION_PATHWAY_REQUIRED"]
+  },
+  "clinicalReview": { "status": "pending_clinical_review" }
+}

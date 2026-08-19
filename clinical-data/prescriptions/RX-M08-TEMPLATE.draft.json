@@ -1,0 +1,35 @@
+{
+  "prescriptionId": "RX-M08-TEMPLATE",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "applicableModules": ["M08"],
+  "applicableFunctionalLevels": ["F0", "F1", "F2", "F3", "F4", "F5"],
+  "goals": ["待临床审核：由治疗师定义"],
+  "trainingName": "待临床审核：不可执行的内容模板",
+  "startPosition": "待临床审核",
+  "steps": ["待临床审核：禁止将本占位内容用于临床执行"],
+  "dose": {
+    "repetitions": { "value": null, "unit": null, "reviewStatus": "pending_clinical_review" },
+    "sets": { "value": null, "unit": null, "reviewStatus": "pending_clinical_review" },
+    "duration": { "value": null, "unit": null, "reviewStatus": "pending_clinical_review" },
+    "frequency": { "value": null, "unit": null, "reviewStatus": "pending_clinical_review" },
+    "intensity": { "value": null, "unit": null, "reviewStatus": "pending_clinical_review" }
+  },
+  "equipment": [],
+  "assistanceLevels": ["AX"],
+  "executorRoles": ["therapist"],
+  "contraindications": [{ "code": "PENDING-CLINICAL-REVIEW", "label": "待临床审核", "reviewStatus": "pending_clinical_review" }],
+  "precautions": [{ "code": "NOT-FOR-CLINICAL-USE", "label": "当前模板不得用于临床执行", "reviewStatus": "pending_clinical_review" }],
+  "terminationCriteria": [{ "code": "PENDING-CLINICAL-REVIEW", "label": "待临床审核", "reviewStatus": "pending_clinical_review" }],
+  "progressionCriteria": [],
+  "regressionCriteria": [],
+  "alternatives": [],
+  "reassessmentMeasures": [],
+  "evidenceSources": [],
+  "audienceContent": {
+    "therapist": "待临床审核：不可执行模板",
+    "caregiver": "未发布",
+    "residentFamily": "未发布"
+  },
+  "clinicalReview": { "status": "pending_clinical_review", "reviewerUserId": null, "reviewedAt": null }
+}

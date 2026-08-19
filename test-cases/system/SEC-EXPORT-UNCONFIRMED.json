@@ -1,0 +1,8 @@
+{
+  "systemTestId": "SEC-EXPORT-UNCONFIRMED",
+  "synthetic": true,
+  "area": "export",
+  "given": { "therapistConfirmed": false, "allPrescriptionVersionsApproved": true },
+  "when": { "event": "request_export", "audience": "caregiver" },
+  "expected": { "result": "denied", "reasonCode": "THERAPIST_CONFIRMATION_REQUIRED", "artifactCreated": false }
+}

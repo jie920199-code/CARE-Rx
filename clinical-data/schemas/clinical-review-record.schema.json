@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://care-rx.local/schemas/clinical-review-record.schema.json",
+  "title": "CARE-Rx clinical content review record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reviewId", "contentType", "contentId", "contentVersion", "decision", "checklist", "reviewerUserId", "reviewedAt"],
+  "properties": {
+    "reviewId": { "type": "string", "pattern": "^REVIEW-[A-Z0-9-]+$" },
+    "contentType": { "enum": ["assessment", "safety_item", "functional_level", "prescription", "decision_rule", "test_case", "institution_pathway"] },
+    "contentId": { "type": "string", "minLength": 1 },
+    "contentVersion": { "type": "string", "minLength": 1 },
+    "decision": { "enum": ["approved", "changes_required", "rejected"] },
+    "checklist": {
+      "type": "object",
+      "required": ["scopeCorrect", "safetyCorrect", "doseCorrectOrNotApplicable", "evidenceVerified", "wordingAppropriate", "testsAdequate"],
+      "properties": {
+        "scopeCorrect": { "type": "boolean" },
+        "safetyCorrect": { "type": "boolean" },
+        "doseCorrectOrNotApplicable": { "type": "boolean" },
+        "evidenceVerified": { "type": "boolean" },
+        "wordingAppropriate": { "type": "boolean" },
+        "testsAdequate": { "type": "boolean" }
+      }
+    },
+    "reviewerUserId": { "type": "string", "minLength": 1 },
+    "reviewedAt": { "type": "string", "format": "date-time" },
+    "changeRequests": { "type": "array", "items": { "type": "string" } },
+    "notes": { "type": "string" }
+  }
+}

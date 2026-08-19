@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://care-rx.local/schemas/transient-session.schema.json",
+  "title": "CARE-Rx non-persistent patient session",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sessionId", "therapistUserId", "createdAt", "absoluteExpiresAt", "idleExpiresAt", "persistencePolicy", "exportState"],
+  "properties": {
+    "sessionId": { "type": "string", "pattern": "^SES-[A-Z0-9-]+$" },
+    "therapistUserId": { "type": "string", "minLength": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "absoluteExpiresAt": { "type": "string", "format": "date-time" },
+    "idleExpiresAt": { "type": "string", "format": "date-time" },
+    "persistencePolicy": { "const": "memory_only_no_patient_logging" },
+    "exportState": { "enum": ["not_confirmed", "therapist_confirmed", "exported", "cleared"] },
+    "assessment": { "$ref": "assessment.schema.json" },
+    "recommendationMetadata": { "type": "object", "properties": { "ruleSetVersion": { "type": "string" }, "prescriptionLibraryVersion": { "type": "string" } } }
+  }
+}

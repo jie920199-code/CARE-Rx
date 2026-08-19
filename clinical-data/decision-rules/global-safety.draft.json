@@ -1,0 +1,12 @@
+{
+  "ruleId": "RULE-GLOBAL-SAFETY-UNKNOWN",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "priority": 1000,
+  "scope": ["GLOBAL_SAFETY"],
+  "when": { "any": [{ "fact": "safetyScreen.hasUnknownRequiredItem", "operator": "equals", "value": true }] },
+  "then": [{ "action": "requireInformation", "reference": null }],
+  "rationaleCode": "SAFETY_REQUIRED_INFORMATION_MISSING",
+  "clinicalReview": { "status": "pending_clinical_review" },
+  "tests": ["TC-M07-MISSING-SAFETY", "TC-M01-NOT-ASSESSED-SAFETY", "TC-M01-BASELINE-REVIEW"]
+}

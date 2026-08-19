@@ -1,0 +1,30 @@
+{
+  "definitionId": "FUNCTIONAL-LEVEL-F0-F5",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "purpose": "保存功能证据并形成暂定等级；不得代替治疗师确认。",
+  "evidenceDomains": [
+    { "domainId": "medical_stability", "label": "医学稳定性", "thresholds": null, "reviewStatus": "pending_clinical_review" },
+    { "domainId": "active_participation", "label": "主动参与能力", "thresholds": null, "reviewStatus": "pending_clinical_review" },
+    { "domainId": "bed_mobility", "label": "床上活动", "thresholds": null, "reviewStatus": "pending_clinical_review" },
+    { "domainId": "sitting", "label": "坐位能力与耐受", "thresholds": null, "reviewStatus": "pending_clinical_review" },
+    { "domainId": "standing_transfer", "label": "站立与转移", "thresholds": null, "reviewStatus": "pending_clinical_review" },
+    { "domainId": "walking", "label": "步行能力", "thresholds": null, "reviewStatus": "pending_clinical_review" },
+    { "domainId": "supervision_need", "label": "认知或安全监督需要", "thresholds": null, "reviewStatus": "pending_clinical_review" }
+  ],
+  "levels": [
+    { "code": "F0", "anchor": "舒适照护级：医学不稳定、终末期或无法主动参与", "operationalCriteria": null, "reviewStatus": "pending_clinical_review" },
+    { "code": "F1", "anchor": "完全卧床级：翻身和坐起完全依赖", "operationalCriteria": null, "reviewStatus": "pending_clinical_review" },
+    { "code": "F2", "anchor": "床上活动级：可参与翻身或短时间坐起", "operationalCriteria": null, "reviewStatus": "pending_clinical_review" },
+    { "code": "F3", "anchor": "转移站立级：能够坐位，需要辅助站立或转移", "operationalCriteria": null, "reviewStatus": "pending_clinical_review" },
+    { "code": "F4", "anchor": "辅助步行级：可在辅助或监护下行走", "operationalCriteria": null, "reviewStatus": "pending_clinical_review" },
+    { "code": "F5", "anchor": "独立活动级：可独立步行或完成主要活动", "operationalCriteria": null, "reviewStatus": "pending_clinical_review" }
+  ],
+  "conflictPolicy": {
+    "algorithmMayForceLevel": false,
+    "resultWhenEvidenceConflicts": "undetermined",
+    "therapistConfirmationRequired": true,
+    "reviewStatus": "pending_clinical_review"
+  },
+  "clinicalReview": { "status": "pending_clinical_review", "reviewerUserId": null, "reviewedAt": null }
+}

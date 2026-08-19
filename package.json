@@ -1,0 +1,13 @@
+{
+  "name": "care-rx",
+  "version": "0.1.0-prototype",
+  "private": true,
+  "description": "CARE-Rx zero-dependency safety prototype; not for clinical use",
+  "type": "module",
+  "scripts": {
+    "test:prototype": "node --test tests/prototype/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

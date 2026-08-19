@@ -1,0 +1,10 @@
+{
+  "configId": "SAFETY-CONFIG-EXAMPLE",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "institutionLabel": "虚构养老机构",
+  "emergency": { "displayText": "停止当前流程并按机构批准的紧急处置制度执行（待机构填写和临床审核）", "contacts": [{ "role": "待机构填写", "contactMethod": "待机构填写" }], "responseTarget": "待机构填写", "reviewStatus": "pending_clinical_review" },
+  "nonEmergencyReferral": { "displayText": "暂停相关模块并按机构批准的转诊制度执行（待机构填写和临床审核）", "contacts": [{ "role": "待机构填写", "contactMethod": "待机构填写" }], "responseTarget": "待机构填写", "reviewStatus": "pending_clinical_review" },
+  "offlineFallback": { "displayText": "系统不可用时按机构纸质或电话兜底制度执行（待机构填写）", "contacts": [{ "role": "待机构填写", "contactMethod": "待机构填写" }], "responseTarget": "待机构填写", "reviewStatus": "pending_clinical_review" },
+  "clinicalReview": { "status": "pending_clinical_review", "reviewerUserId": null, "reviewedAt": null }
+}

@@ -1,0 +1,41 @@
+{
+  "testCaseId": "TC-M07-MISSING-SAFETY",
+  "version": "0.1.0-draft",
+  "synthetic": true,
+  "module": "M07",
+  "description": "虚构病例：慢性腰痛相关功能问题，但一个必需安全项未知，必须补充信息且不得匹配处方。",
+  "input": {
+    "assessmentId": "ASM-TC-M07-001",
+    "schemaVersion": "0.1.0",
+    "synthetic": true,
+    "performedAt": "2026-08-18T00:00:00Z",
+    "assessorUserId": "THERAPIST-TEST-01",
+    "subject": { "ephemeralId": "TMP-M07-001", "ageBand": "75-84", "sex": "unspecified" },
+    "safetyScreen": {
+      "screenVersion": "0.1.0-draft",
+      "items": [
+        { "itemId": "SF-ACUTE-NEUROLOGICAL-CHANGE", "answer": "unknown", "reviewStatus": "pending_clinical_review" },
+        { "itemId": "SF-MEDICAL-INSTABILITY", "answer": "no", "reviewStatus": "pending_clinical_review" },
+        { "itemId": "SF-NEW-SEVERE-SYMPTOM", "answer": "no", "reviewStatus": "pending_clinical_review" }
+      ],
+      "outcome": "needs_information"
+    },
+    "functionalEvidence": {
+      "domains": [{ "domainId": "walking_support", "value": "supervision" }],
+      "provisionalLevel": "F4",
+      "therapistConfirmationRequired": true
+    },
+    "problems": [{ "moduleId": "M07", "role": "primary" }],
+    "goalModes": { "primary": "M", "secondary": ["R"] },
+    "careContext": { "staffing": ["therapist_available"], "equipment": [], "environment": ["indoor_level_surface"] },
+    "clinicalReviewStatus": "pending_clinical_review"
+  },
+  "expected": {
+    "safetyOutcome": "needs_information",
+    "matchingOutcome": "needs_information",
+    "allowedPrescriptionIds": [],
+    "excludedPrescriptionIds": [],
+    "rationaleCodes": ["SAFETY_REQUIRED_INFORMATION_MISSING"]
+  },
+  "clinicalReview": { "status": "pending_clinical_review" }
+}

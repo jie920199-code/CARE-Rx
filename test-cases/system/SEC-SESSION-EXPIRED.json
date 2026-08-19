@@ -1,0 +1,13 @@
+{
+  "systemTestId": "SEC-SESSION-EXPIRED",
+  "synthetic": true,
+  "area": "transient_session",
+  "given": { "sessionState": "active", "patientPayloadPresentInMemory": true },
+  "when": { "event": "absolute_timeout" },
+  "expected": {
+    "sessionState": "cleared",
+    "patientPayloadPresentInMemory": false,
+    "patientPayloadWrittenToDatabase": false,
+    "patientPayloadWrittenToLog": false
+  }
+}

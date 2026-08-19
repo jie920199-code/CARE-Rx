@@ -1,0 +1,12 @@
+{
+  "definitionId": "ASSESSMENT-SAFETY-V1",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "description": "红旗安全筛查结构占位。具体条目、措辞、触发级别和处置路径均待临床审核。",
+  "items": [
+    { "itemId": "SF-ACUTE-NEUROLOGICAL-CHANGE", "label": "是否存在新发或突然加重的神经功能变化（待临床审核）", "required": true, "reviewStatus": "pending_clinical_review" },
+    { "itemId": "SF-MEDICAL-INSTABILITY", "label": "是否存在提示医学状态不稳定的情况（待临床审核）", "required": true, "reviewStatus": "pending_clinical_review" },
+    { "itemId": "SF-NEW-SEVERE-SYMPTOM", "label": "是否存在新发严重症状或近期重大变化（待临床审核）", "required": true, "reviewStatus": "pending_clinical_review" }
+  ],
+  "clinicalReview": { "status": "pending_clinical_review" }
+}

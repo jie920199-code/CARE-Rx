@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://care-rx.local/schemas/prescription.schema.json",
+  "title": "CARE-Rx prescription definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["prescriptionId", "version", "status", "applicableModules", "applicableFunctionalLevels", "goals", "trainingName", "startPosition", "steps", "dose", "equipment", "assistanceLevels", "executorRoles", "contraindications", "precautions", "terminationCriteria", "progressionCriteria", "regressionCriteria", "alternatives", "reassessmentMeasures", "evidenceSources", "audienceContent", "clinicalReview"],
+  "properties": {
+    "prescriptionId": { "type": "string", "pattern": "^RX-[A-Z0-9-]+$" },
+    "version": { "type": "string" },
+    "status": { "enum": ["draft", "review", "approved", "retired"] },
+    "applicableModules": { "type": "array", "minItems": 1, "items": { "enum": ["M01", "M07", "M08"] } },
+    "applicableFunctionalLevels": { "type": "array", "minItems": 1, "items": { "enum": ["F0", "F1", "F2", "F3", "F4", "F5"] } },
+    "goals": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "trainingName": { "type": "string", "minLength": 1 },
+    "startPosition": { "type": "string", "minLength": 1 },
+    "steps": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "dose": { "type": "object", "required": ["repetitions", "sets", "duration", "frequency", "intensity"], "properties": { "repetitions": { "$ref": "#/$defs/reviewableValue" }, "sets": { "$ref": "#/$defs/reviewableValue" }, "duration": { "$ref": "#/$defs/reviewableValue" }, "frequency": { "$ref": "#/$defs/reviewableValue" }, "intensity": { "$ref": "#/$defs/reviewableValue" } } },
+    "equipment": { "type": "array", "items": { "type": "string" } },
+    "assistanceLevels": { "type": "array", "items": { "enum": ["A0", "A1", "A2", "A3", "A4", "A5", "AX"] } },
+    "executorRoles": { "type": "array", "items": { "enum": ["therapist", "caregiver", "resident_family"] } },
+    "contraindications": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/criterion" } },
+    "precautions": { "type": "array", "items": { "$ref": "#/$defs/criterion" } },
+    "terminationCriteria": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/criterion" } },
+    "progressionCriteria": { "type": "array", "items": { "$ref": "#/$defs/criterion" } },
+    "regressionCriteria": { "type": "array", "items": { "$ref": "#/$defs/criterion" } },
+    "alternatives": { "type": "array", "items": { "type": "string" } },
+    "reassessmentMeasures": { "type": "array", "items": { "type": "string" } },
+    "evidenceSources": { "type": "array", "items": { "type": "object", "required": ["sourceId", "citation", "verificationStatus"], "properties": { "sourceId": { "type": "string" }, "citation": { "type": "string" }, "verificationStatus": { "enum": ["pending_verification", "verified"] } } } },
+    "audienceContent": { "type": "object", "required": ["therapist", "caregiver", "residentFamily"], "properties": { "therapist": { "type": "string" }, "caregiver": { "type": "string" }, "residentFamily": { "type": "string" } } },
+    "clinicalReview": { "type": "object", "required": ["status"], "properties": { "status": { "enum": ["pending_clinical_review", "approved"] }, "reviewerUserId": { "type": ["string", "null"] }, "reviewedAt": { "type": ["string", "null"], "format": "date-time" } } }
+  },
+  "$defs": {
+    "reviewableValue": { "type": "object", "required": ["value", "unit", "reviewStatus"], "properties": { "value": { "type": ["number", "string", "null"] }, "unit": { "type": ["string", "null"] }, "reviewStatus": { "enum": ["pending_clinical_review", "approved"] } } },
+    "criterion": { "type": "object", "required": ["code", "label", "reviewStatus"], "properties": { "code": { "type": "string" }, "label": { "type": "string" }, "reviewStatus": { "enum": ["pending_clinical_review", "approved"] } } }
+  }
+}

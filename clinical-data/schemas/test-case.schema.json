@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://care-rx.local/schemas/test-case.schema.json",
+  "title": "CARE-Rx synthetic golden test case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["testCaseId", "version", "synthetic", "module", "description", "input", "expected", "clinicalReview"],
+  "properties": {
+    "testCaseId": { "type": "string", "pattern": "^TC-[A-Z0-9-]+$" },
+    "version": { "type": "string" },
+    "synthetic": { "const": true },
+    "module": { "enum": ["M01", "M07", "M08"] },
+    "description": { "type": "string" },
+    "input": { "$ref": "assessment.schema.json" },
+    "expected": { "type": "object", "required": ["safetyOutcome", "matchingOutcome", "allowedPrescriptionIds", "excludedPrescriptionIds", "rationaleCodes"], "properties": { "safetyOutcome": { "enum": ["safety_blocked", "needs_information", "eligible_for_matching"] }, "matchingOutcome": { "enum": ["blocked", "needs_information", "needs_therapist_review", "candidate_set"] }, "allowedPrescriptionIds": { "type": "array", "items": { "type": "string" } }, "excludedPrescriptionIds": { "type": "array", "items": { "type": "string" } }, "rationaleCodes": { "type": "array", "minItems": 1, "items": { "type": "string" } } } },
+    "clinicalReview": { "type": "object", "required": ["status"], "properties": { "status": { "enum": ["pending_clinical_review", "approved"] } } }
+  }
+}
