@@ -11,6 +11,24 @@
   --red: #a43c32;
 }
 
+.assessmentShell { min-height: 100vh; padding: 0 2rem 4rem; background: #f7f9f5; }
+.assessmentIntro, .resultHero { max-width: 820px; padding: 4rem 0 2rem; }
+.assessmentIntro h1, .resultHero h1 { margin: .5rem 0 1rem; font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1; }
+.assessmentForm { display: grid; gap: 1rem; max-width: 920px; }
+.assessmentForm fieldset { display: grid; gap: 1rem; margin: 0; padding: 1.5rem; border: 1px solid #d7ddd6; border-radius: 18px; background: #fff; }
+.assessmentForm legend { padding: 0 .5rem; color: #075c46; font-weight: 800; }
+.assessmentForm label:not(.choice) { display: grid; gap: .45rem; font-weight: 700; }
+.assessmentForm input:not([type]), .assessmentForm select { min-height: 46px; padding: .65rem .8rem; border: 1px solid #aebbb4; border-radius: 9px; background: #fff; font: inherit; }
+.choice { display: flex; gap: .7rem; align-items: flex-start; padding: .65rem; border-radius: 9px; background: #f5f8f5; }
+.reviewWarning { padding: 1rem 1.2rem; border-left: 4px solid #b57a12; background: #fff7e5; color: #654509; }
+.assessmentActions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.assessmentActions button, .primaryAction { display: inline-block; padding: .85rem 1.1rem; border: 0; border-radius: 10px; background: #0a6b52; color: #fff; font-weight: 800; text-decoration: none; }
+.assessmentActions p { color: #5b6761; }
+.resultGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.resultGrid article { display: grid; gap: .5rem; padding: 1.25rem; border: 1px solid #d7ddd6; border-radius: 14px; background: #fff; }
+.resultGrid span { color: #65716b; font-size: .9rem; }
+@media (max-width: 640px) { .assessmentShell { padding-inline: 1rem; } .resultGrid { grid-template-columns: 1fr; } }
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {

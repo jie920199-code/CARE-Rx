@@ -17,11 +17,11 @@ export default async function WorkspacePage() {
         <form action="/api/auth/logout" method="post"><button className="textButton" type="submit">安全退出</button></form>
       </header>
       <section className="workspaceHero">
-        <div><p className="eyebrow">SIGNED IN · MEMORY ONLY</p><h1>欢迎，{session.therapistUserId}</h1><p>身份会话仅保存在当前服务进程内。当前尚未开放患者评估录入。</p></div>
-        <div className="workspaceState"><span>当前阶段</span><strong>认证骨架</strong><p>等待无患者留存评估会话完成安全审核</p></div>
+        <div><p className="eyebrow">SIGNED IN · MEMORY ONLY</p><h1>欢迎，{session.therapistUserId}</h1><p>可创建不留存的临时评估；禁止输入任何真实患者身份信息。</p></div>
+        <div className="workspaceState"><span>当前阶段</span><strong>临时评估骨架</strong><p>安全筛查默认失败关闭，尚不生成处方</p></div>
       </section>
       <section className="workspaceGrid">
-        <article><span className="stepTag">01</span><h2>新建临时评估</h2><p>患者信息不会建立档案，也不得写入日志或备份。</p><button type="button" disabled>暂未开放</button></article>
+        <article><span className="stepTag">01</span><h2>新建临时评估</h2><p>仅限虚构病例代号；内容只保存在当前服务器内存中。</p><a className="primaryAction" href="/assessment/new">开始临时评估</a></article>
         <article><span className="stepTag">安全状态</span><h2>默认失败关闭</h2><p>未配置临床批准内容前，不运行草案规则、不生成处方。</p><a href="/">查看项目边界</a></article>
       </section>
     </main>
