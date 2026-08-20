@@ -20,6 +20,7 @@
 .assessmentForm label:not(.choice) { display: grid; gap: .45rem; font-weight: 700; }
 .assessmentForm input:not([type]), .assessmentForm select { min-height: 46px; padding: .65rem .8rem; border: 1px solid #aebbb4; border-radius: 9px; background: #fff; font: inherit; }
 .choice { display: flex; gap: .7rem; align-items: flex-start; padding: .65rem; border-radius: 9px; background: #f5f8f5; }
+.fieldHelp { margin: 0; color: #5b6761; font-size: .92rem; }
 .reviewWarning { padding: 1rem 1.2rem; border-left: 4px solid #b57a12; background: #fff7e5; color: #654509; }
 .assessmentActions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
 .assessmentActions button, .primaryAction { display: inline-block; padding: .85rem 1.1rem; border: 0; border-radius: 10px; background: #0a6b52; color: #fff; font-weight: 800; text-decoration: none; }
