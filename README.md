@@ -29,6 +29,7 @@ CARE-Rx 依据安全状态、功能等级、核心功能问题、康复潜力和
 - [最小安全原型](docs/PROTOTYPE.md)
 - [Next.js应用骨架](docs/APP_SKELETON.md)
 - [网页登录与临时会话](docs/AUTHENTICATION.md)
+- [临时评估入口](docs/TRANSIENT_ASSESSMENT.md)
 - [GitHub协作与发布流程](docs/GITHUB_WORKFLOW.md)
 
 ## 目录约定
