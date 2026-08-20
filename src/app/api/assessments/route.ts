@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
 
 import { evaluateAssessmentSafety } from "@/application/assessment-safety-gate.mjs";
+import { validateAssessmentInput } from "@/application/assessment-input.mjs";
 import { transientAssessmentStore } from "@/application/transient-assessment-runtime.mjs";
 import { authSessionStore } from "@/security/auth-session-store.mjs";
 import { isSameOriginRequest } from "@/security/request-origin.mjs";
 import { SESSION_COOKIE } from "@/security/session-cookie.mjs";
-
-const AGE_BANDS = new Set(["65-74", "75-84", "85-plus", "unknown"]);
-const MODULES = new Set(["M01", "M07", "M08"]);
 
 function cookieValue(request: Request, name: string) {
   return request.headers.get("cookie")?.split(";").map((part) => part.trim().split("=")).find(([key]) => key === name)?.[1];
@@ -32,9 +30,8 @@ export async function POST(request: Request) {
     medicalInstability: String(form.get("medicalInstability") ?? ""),
     newSevereSymptom: String(form.get("newSevereSymptom") ?? ""),
   };
-  if (!/^CASE-[A-Z0-9-]{2,24}$/.test(caseAlias) || !AGE_BANDS.has(ageBand) || modules.length === 0 || modules.some((item) => !MODULES.has(item))) {
-    return redirectTo(request, "/assessment/new?error=invalid");
-  }
+  const inputError = validateAssessmentInput({ caseAlias, ageBand, modules });
+  if (inputError) return redirectTo(request, `/assessment/new?error=${inputError}`);
   const safety = evaluateAssessmentSafety(safetyResponses);
   const sessionId = transientAssessmentStore.create({
     therapistUserId: therapist.therapistUserId,
