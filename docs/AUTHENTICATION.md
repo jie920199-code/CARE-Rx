@@ -33,7 +33,7 @@ try {
 }
 ```
 
-把输出填写到 `CARE_RX_THERAPIST_PASSWORD_HASH`。密码至少 12 个字符，建议采用更长的唯一口令。用户名填写到 `CARE_RX_THERAPIST_USERNAME`。
+把工具输出原样填写到 `CARE_RX_THERAPIST_PASSWORD_HASH`。输出中的 `\$` 是 `.env.local` 必需的转义符，不要删除。密码至少 12 个字符，建议采用更长的唯一口令。用户名填写到 `CARE_RX_THERAPIST_USERNAME`。
 
 `CARE_RX_COOKIE_SECURE=false` 只允许在隔离的本机 HTTP 开发环境临时使用。局域网内的平板和手机访问必须通过可信 HTTPS 入口，并保持该值为 `true`。
 

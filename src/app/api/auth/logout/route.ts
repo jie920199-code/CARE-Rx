@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     .find(([name]) => name === SESSION_COOKIE)?.[1];
   authSessionStore.delete(token);
   const config = loadAuthConfig();
-  const response = NextResponse.redirect(new URL("/login", request.url), 303);
+  const response = NextResponse.redirect(new URL("/login", request.headers.get("origin") ?? request.url), 303);
   response.cookies.set(SESSION_COOKIE, "", sessionCookieOptions({ secureCookie: config.secureCookie, maxAge: 0 }));
   response.headers.set("Cache-Control", "no-store");
   return response;

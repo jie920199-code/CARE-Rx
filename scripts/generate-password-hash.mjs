@@ -10,5 +10,6 @@ if (!password) {
   console.error("请通过标准输入提供密码；密码不会写入项目文件。");
   process.exitCode = 1;
 } else {
-  console.log(await hashPassword(password));
+  const encoded = await hashPassword(password);
+  console.log(encoded.replaceAll("$", "\\$"));
 }

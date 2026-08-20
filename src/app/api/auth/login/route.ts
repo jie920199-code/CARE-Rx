@@ -8,7 +8,7 @@ import { isSameOriginRequest } from "@/security/request-origin.mjs";
 import { SESSION_COOKIE, sessionCookieOptions } from "@/security/session-cookie.mjs";
 
 function redirectToLogin(request: Request, error: string) {
-  const url = new URL("/login", request.url);
+  const url = new URL("/login", request.headers.get("origin") ?? request.url);
   url.searchParams.set("error", error);
   return NextResponse.redirect(url, 303);
 }
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     idleTimeoutMs: config.idleTimeoutMs,
     absoluteTimeoutMs: config.absoluteTimeoutMs,
   });
-  const response = NextResponse.redirect(new URL("/workspace", request.url), 303);
+  const response = NextResponse.redirect(new URL("/workspace", request.headers.get("origin") ?? request.url), 303);
   response.cookies.set(
     SESSION_COOKIE,
     token,

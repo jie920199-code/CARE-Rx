@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import test from "node:test";
 
 import { loadAuthConfig } from "../../src/security/auth-config.mjs";
@@ -17,6 +18,21 @@ test("password hashes verify without retaining plaintext", async () => {
   assert.equal(await verifyPassword(password, encoded), true);
   assert.equal(await verifyPassword("incorrect-password", encoded), false);
   assert.equal(await verifyPassword(password, "malformed"), false);
+});
+
+test("password hash tool emits dotenv-safe output", async () => {
+  const password = "another-test-password";
+  const result = spawnSync(process.execPath, ["scripts/generate-password-hash.mjs"], {
+    cwd: process.cwd(),
+    encoding: "utf8",
+    input: `${password}\n`,
+  });
+  assert.equal(result.status, 0);
+  const dotenvValue = result.stdout.trim();
+  assert.match(dotenvValue, /^scrypt\\\$/);
+  assert.equal(dotenvValue.includes("$"), true);
+  assert.equal(dotenvValue.includes("\\$"), true);
+  assert.equal(await verifyPassword(password, dotenvValue.replaceAll("\\$", "$")), true);
 });
 
 test("authentication configuration fails closed when credentials are absent", () => {
@@ -76,7 +92,7 @@ test("state-changing requests require an exact same origin", () => {
   assert.equal(
     isSameOriginRequest(
       new Request("https://care-rx.local/api/auth/login", {
-        headers: { origin: "https://care-rx.local" },
+        headers: { host: "care-rx.local", origin: "https://care-rx.local" },
       }),
     ),
     true,
@@ -84,7 +100,23 @@ test("state-changing requests require an exact same origin", () => {
   assert.equal(
     isSameOriginRequest(
       new Request("https://care-rx.local/api/auth/login", {
-        headers: { origin: "https://attacker.invalid" },
+        headers: { host: "care-rx.local", origin: "https://attacker.invalid" },
+      }),
+    ),
+    false,
+  );
+  assert.equal(
+    isSameOriginRequest(
+      new Request("http://0.0.0.0:3000/api/auth/login", {
+        headers: { host: "localhost:3000", origin: "http://localhost:3000" },
+      }),
+    ),
+    true,
+  );
+  assert.equal(
+    isSameOriginRequest(
+      new Request("http://0.0.0.0:3000/api/auth/login", {
+        headers: { host: "localhost:3000", origin: "https://localhost:3000" },
       }),
     ),
     false,
