@@ -8,6 +8,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "auth:hash-password": "node scripts/generate-password-hash.mjs",
     "typecheck": "tsc --noEmit",
     "test:prototype": "node --test tests/prototype/*.test.mjs",
     "check": "pnpm typecheck && pnpm test:prototype && pnpm build"
