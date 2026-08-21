@@ -1,0 +1,38 @@
+name: Build CARE-Rx mobile site
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [agent/mobile-hosting]
+    paths: ["mobile-site/**", ".github/workflows/sites-build.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: mobile-site
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: mobile-site/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: care-rx-mobile-dist
+          path: |
+            mobile-site/dist
+            mobile-site/.openai/hosting.json
+          include-hidden-files: true
+          if-no-files-found: error

@@ -1,0 +1,60 @@
+{
+  "prescriptionId": "RX-M08-TASK-PRACTICE",
+  "version": "1.0.0",
+  "status": "approved",
+  "applicableModules": ["M08"],
+  "applicableFunctionalLevels": ["F2", "F3", "F4"],
+  "goals": ["提高卒中后主动运动与任务参与", "改善坐位、转移、站立或步行相关能力", "通过重复任务练习促进安全功能恢复"],
+  "trainingName": "脑卒中任务特异性重复训练",
+  "startPosition": "由治疗师依据躯干控制、患侧负重能力和辅助等级选择床边坐位、稳定坐位或保护下站位",
+  "steps": [
+    "确认医学状态稳定，并复核新发神经变化、吞咽/呼吸风险、跌倒风险和活动限制。",
+    "围绕个人目标选择一项主要功能任务，如坐位伸手、坐站、床椅转移或保护下步行。",
+    "将任务分解为必要组成部分进行练习，随后回到完整任务，强调主动参与和重复。",
+    "使用必要的辅助器具、身体辅助或环境调整保证安全，但逐步减少不必要帮助。",
+    "记录完成量、动作质量、辅助等级、疲劳和不良反应，并据此调整下一次训练。"
+  ],
+  "dose": {
+    "repetitions": { "value": "按任务质量累计10～30次，可分小组完成", "unit": "次/主要任务", "reviewStatus": "approved" },
+    "sets": { "value": "2～5个短练习段", "unit": "段", "reviewStatus": "approved" },
+    "duration": { "value": "20～40", "unit": "分钟/次，可分段", "reviewStatus": "approved" },
+    "frequency": { "value": "每周3～5天；在治疗师指导下将安全功能练习融入日常活动", "unit": null, "reviewStatus": "approved" },
+    "intensity": { "value": "以高质量重复和个体耐受为准；有氧成分须另行完成心血管筛查并个体化", "unit": null, "reviewStatus": "approved" }
+  },
+  "equipment": ["稳定椅或轮椅", "转移辅助设备（按评估）", "步行辅助器具（按评估）", "必要时踝足矫形器或其他辅助装置（需专业评估）"],
+  "assistanceLevels": ["A1", "A2", "A3", "A4", "A5", "AX"],
+  "executorRoles": ["therapist"],
+  "contraindications": [
+    { "code": "ACUTE-NEUROLOGICAL-CHANGE", "label": "存在新发或突然加重的神经功能变化", "reviewStatus": "approved" },
+    { "code": "NOT-MEDICALLY-STABLE", "label": "医学状态不稳定或尚未获准进行相应活动", "reviewStatus": "approved" },
+    { "code": "UNSAFE-ASSISTANCE", "label": "无法提供所需人员、机械辅助或环境保护", "reviewStatus": "approved" }
+  ],
+  "precautions": [
+    { "code": "FALL-AND-SHOULDER-PROTECTION", "label": "保护患侧肩关节和肢体，防止牵拉、碰撞与跌倒", "reviewStatus": "approved" },
+    { "code": "COGNITION-COMMUNICATION", "label": "根据认知、注意、忽略、失语和指令理解能力调整提示与环境", "reviewStatus": "approved" }
+  ],
+  "terminationCriteria": [
+    { "code": "NEW-STROKE-SIGN", "label": "出现新发面口歪斜、言语改变、肢体无力、意识改变或其他急性神经征象", "reviewStatus": "approved" },
+    { "code": "CARDIORESPIRATORY-SYMPTOM", "label": "出现胸痛、明显呼吸困难、晕厥或异常恢复", "reviewStatus": "approved" },
+    { "code": "LOSS-OF-SAFE-CONTROL", "label": "无法维持所需姿势控制或辅助条件不足", "reviewStatus": "approved" }
+  ],
+  "progressionCriteria": [
+    { "code": "LESS-ASSISTANCE", "label": "在动作质量和安全不下降时所需辅助等级降低", "reviewStatus": "approved" },
+    { "code": "MORE-QUALITY-REPETITIONS", "label": "可完成更多高质量重复或更接近日常环境的完整任务", "reviewStatus": "approved" }
+  ],
+  "regressionCriteria": [
+    { "code": "FATIGUE-OR-COMPENSATION", "label": "疲劳、代偿、疼痛或不安全动作增加", "reviewStatus": "approved" }
+  ],
+  "alternatives": ["由站立或步行降级为坐位任务", "由完整任务降级为组成部分练习", "增加身体辅助、器具或休息"],
+  "reassessmentMeasures": ["转移与步行辅助等级", "任务完成次数和质量", "10米步行或替代移动指标（适用时）", "坐站表现", "平衡与跌倒风险", "日常活动参与"],
+  "evidenceSources": [
+    { "sourceId": "UK-STROKE-GUIDELINE-2023-MOTOR", "citation": "National Clinical Guideline for Stroke 2023. Motor recovery and physical effects of stroke: task-specific repetitive practice and individualised exercise.", "verificationStatus": "verified" },
+    { "sourceId": "UK-STROKE-GUIDELINE-2023-PRINCIPLES", "citation": "National Clinical Guideline for Stroke 2023. Rehabilitation intensity and integration of functional practice into daily routines.", "verificationStatus": "verified" }
+  ],
+  "audienceContent": {
+    "therapist": "正式处方库版本：以任务特异性、重复和主动参与为核心；每次匹配需结合医学稳定性和个体目标确认。",
+    "caregiver": "仅执行治疗师确认的任务练习和辅助方式，保护患侧肩部并严防跌倒。",
+    "residentFamily": "训练采用与日常功能相关的重复练习；出现新发神经症状时立即停止并按流程处理。"
+  },
+  "clinicalReview": { "status": "approved", "reviewerUserId": "therapist", "reviewedAt": "2026-08-21T01:00:21Z" }
+}
