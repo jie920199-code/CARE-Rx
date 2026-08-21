@@ -2,6 +2,9 @@
 node_modules/
 .pnpm-store/
 .next/
+.open-next/
+.wrangler/
+.dev.vars
 out/
 coverage/
 *.tsbuildinfo
@@ -31,3 +34,7 @@ Thumbs.db
 # Codex working/output areas
 work/
 outputs/
+
+# Local development server logs
+.care-rx-dev.log
+.care-rx-dev-error.log
