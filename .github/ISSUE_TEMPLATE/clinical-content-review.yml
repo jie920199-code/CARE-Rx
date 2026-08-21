@@ -3,6 +3,16 @@ description: 跟踪评估、红旗、规则、处方或测试病例的治疗师�
 title: "[临床审核] "
 labels: ["clinical-review"]
 body:
+  - type: markdown
+    attributes:
+      value: "禁止填写真实患者资料。临床建议必须引用内容 ID 与版本，并说明依据。"
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认
+      options:
+        - label: 本 Issue 及附件只包含虚构数据，不含可识别患者信息
+          required: true
   - type: dropdown
     id: content-type
     attributes:
