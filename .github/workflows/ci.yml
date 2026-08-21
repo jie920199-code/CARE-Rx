@@ -47,12 +47,6 @@ jobs:
         shell: pwsh
         run: pnpm build
 
-      - name: Confirm no clinical JSON is marked approved
+      - name: Validate approved clinical content and review records
         shell: pwsh
-        run: |
-          $matches = Get-ChildItem clinical-data,test-cases -Recurse -File -Filter *.json |
-            Select-String -Pattern '"status"\s*:\s*"approved"','"reviewStatus"\s*:\s*"approved"','"decision"\s*:\s*"approved"'
-          if ($matches) {
-            $matches | ForEach-Object { Write-Error $_ }
-            throw 'Clinical JSON contains approved content without a committed review workflow.'
-          }
+        run: .\scripts\validate-clinical-approvals.ps1

@@ -1,0 +1,12 @@
+{
+  "reviewId": "REVIEW-RX-M07-GRADED-ACTIVITY-1-0-0",
+  "contentType": "prescription",
+  "contentId": "RX-M07-GRADED-ACTIVITY",
+  "contentVersion": "1.0.0",
+  "decision": "approved",
+  "checklist": { "scopeCorrect": true, "safetyCorrect": true, "doseCorrectOrNotApplicable": true, "evidenceVerified": true, "wordingAppropriate": true, "testsAdequate": true },
+  "reviewerUserId": "therapist",
+  "reviewedAt": "2026-08-21T01:00:21Z",
+  "changeRequests": [],
+  "notes": "项目唯一维护治疗师在 Codex 项目任务中明确批准当前版本的剂量、辅助等级、禁忌证、终止标准、进阶及降级标准。"
+}
