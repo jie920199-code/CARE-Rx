@@ -1,26 +1,13 @@
-# CARE-Rx Security Policy
+# Security Policy
 
-## Supported status
+CARE-Rx 当前是公开评审原型，不得用于存放或处理真实患者资料。
 
-CARE-Rx is currently a planning and safety-prototype project. It is not approved for clinical deployment and does not contain approved clinical prescriptions.
+## 报告安全问题
 
-## Reporting a vulnerability
+不要在公开 Issue 中披露可利用细节、密码、Cookie、环境变量、真实患者数据或机构网络信息。请通过仓库所有者的 GitHub 个人资料私下联系维护者，并仅提供复现所需的最少虚构数据。
 
-Do not open a normal GitHub Issue containing vulnerability details, credentials, patient information or screenshots with sensitive data. Use the repository's private security advisory channel:
+如果问题已经造成真实患者信息进入 GitHub，请不要继续复制或引用该信息；立即通知维护者处理删除、凭据轮换和暴露评估。
 
-`https://github.com/jie920199-code/CARE-Rx/security/advisories/new`
+## 支持范围
 
-Include only synthetic reproduction data. Never attach real patient records, images, exports, databases or logs.
-
-## High-priority security areas
-
-- Bypass of red flags, contraindications, pause or referral gates.
-- Execution or export of unapproved clinical rules or prescriptions.
-- Patient input reaching databases, logs, telemetry, backups or crash reports.
-- Session ownership, timeout or clearing failures.
-- Authentication, authorization, CSRF, session fixation or network exposure issues.
-- Rule-engine support for arbitrary code, unknown operators or unsafe actions.
-
-## Response expectations
-
-Security reports should be acknowledged privately before any public discussion. Clinical safety concerns remain blocked until reviewed by a qualified therapist and covered by regression tests.
+仅维护主分支最新版本。当前原型尚未完成生产级 HTTPS、审计、备份、灾难恢复、多账号权限和机构安全审批，因此不应部署到公网或用于真实临床流程。
