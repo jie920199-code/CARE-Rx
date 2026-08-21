@@ -1,10 +1,16 @@
 # CARE-Rx
 
+[![CARE-Rx safety checks](https://github.com/jie920199-code/CARE-Rx/actions/workflows/ci.yml/badge.svg)](https://github.com/jie920199-code/CARE-Rx/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/jie920199-code/CARE-Rx?include_prereleases)](https://github.com/jie920199-code/CARE-Rx/releases)
+[![Issues](https://img.shields.io/github/issues/jie920199-code/CARE-Rx)](https://github.com/jie920199-code/CARE-Rx/issues/new/choose)
+
 面向养老机构治疗师的功能康复评估与处方临床决策支持原型。
 
 CARE-Rx 不根据疾病名称自动开方，而是依据安全状态、F0～F5 功能等级、核心功能问题、康复目标和辅助条件，从治疗师批准的版本化处方库中进行确定性匹配。系统不诊断疾病，也不替代医生、康复医师或治疗师的临床判断。
 
 > 当前状态：公开评审原型。仅允许使用虚构病例；尚未完成机构级安全路径、HTTPS 部署和真实临床试点审批。
+
+稳定评审快照请从 [GitHub Releases](https://github.com/jie920199-code/CARE-Rx/releases) 获取；`main` 用于持续完善。
 
 ## 可以体验什么
 
