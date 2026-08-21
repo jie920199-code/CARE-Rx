@@ -1,0 +1,59 @@
+{
+  "prescriptionId": "RX-M01-BED-MULTICOMPONENT",
+  "version": "0.1.0-draft",
+  "status": "draft",
+  "applicableModules": ["M01"],
+  "applicableFunctionalLevels": ["F1", "F2", "F3"],
+  "goals": ["预防或减轻废用相关功能下降", "维持关节活动与主动参与", "为床上活动、坐起和转移训练建立基础"],
+  "trainingName": "卧床期多组分主动参与训练（待临床审核）",
+  "startPosition": "根据能力采用仰卧、床头抬高位或稳定坐位；由治疗师确认体位与辅助方式",
+  "steps": [
+    "治疗师先复核安全筛查、生命体征趋势、疼痛和当日参与能力。",
+    "完成踝泵、足跟滑动、髋膝主动或主动助力屈伸等床上循环与活动度练习。",
+    "在可控范围内完成上肢推拉、下肢伸展或弹力带低阻力训练；避免屏气。",
+    "能力允许时加入床上翻身、桥式准备、坐起或坐位躯干控制等功能任务。",
+    "训练后复核症状、疲劳与功能表现，并记录是否需要降级或暂停。"
+  ],
+  "dose": {
+    "repetitions": { "value": "每项8～12次，以动作质量和耐受为限", "unit": "次", "reviewStatus": "pending_clinical_review" },
+    "sets": { "value": "1～2", "unit": "组", "reviewStatus": "pending_clinical_review" },
+    "duration": { "value": "10～30", "unit": "分钟/次，可分段", "reviewStatus": "pending_clinical_review" },
+    "frequency": { "value": "每周3～5天；低强度床上活动可由治疗师拆分为每日短时练习", "unit": null, "reviewStatus": "pending_clinical_review" },
+    "intensity": { "value": "低至中等强度，主观用力约2～4/10；不以达到力竭为目标", "unit": null, "reviewStatus": "pending_clinical_review" }
+  },
+  "equipment": ["床栏或床边稳定支撑", "软球（可选）", "低阻力弹力带（可选）"],
+  "assistanceLevels": ["A1", "A2", "A3", "A4", "AX"],
+  "executorRoles": ["therapist"],
+  "contraindications": [
+    { "code": "SAFETY-GATE-NOT-CLEARED", "label": "红旗筛查未通过、医学状态不稳定或必需信息不明确", "reviewStatus": "pending_clinical_review" },
+    { "code": "MOVEMENT-NOT-AUTHORIZED", "label": "医嘱限制活动或治疗师尚未确认可安全参与", "reviewStatus": "pending_clinical_review" }
+  ],
+  "precautions": [
+    { "code": "ORTHOSTATIC-INTOLERANCE", "label": "改变体位时观察头晕、面色和意识变化，必要时分级抬高", "reviewStatus": "pending_clinical_review" },
+    { "code": "SKIN-JOINT-PROTECTION", "label": "保护皮肤、骨突、关节和管路，避免快速牵拉与屏气", "reviewStatus": "pending_clinical_review" }
+  ],
+  "terminationCriteria": [
+    { "code": "NEW-RED-FLAG", "label": "出现新发胸痛、明显呼吸困难、晕厥、意识改变或新发神经功能变化", "reviewStatus": "pending_clinical_review" },
+    { "code": "SYMPTOM-ESCALATION", "label": "疼痛、气促、疲劳或其他症状明显加重且休息后不能缓解", "reviewStatus": "pending_clinical_review" },
+    { "code": "UNSAFE-TECHNIQUE", "label": "无法维持安全体位、动作质量或所需辅助条件", "reviewStatus": "pending_clinical_review" }
+  ],
+  "progressionCriteria": [
+    { "code": "TOLERATES-BASELINE", "label": "在症状稳定、动作质量可控的情况下连续完成当前剂量", "reviewStatus": "pending_clinical_review" },
+    { "code": "FUNCTIONAL-PARTICIPATION", "label": "床上活动、坐起或转移中的主动参与增加", "reviewStatus": "pending_clinical_review" }
+  ],
+  "regressionCriteria": [
+    { "code": "POST-EXERCISE-RECOVERY", "label": "训练后恢复延迟、次日功能下降或辅助需求增加", "reviewStatus": "pending_clinical_review" }
+  ],
+  "alternatives": ["缩短单次时长并增加休息", "由抗阻改为主动助力活动", "由坐位任务降级为床上活动"],
+  "reassessmentMeasures": ["床上翻身/坐起辅助等级", "坐位耐受时间", "握力或替代力量指标", "30秒坐站（仅适用且安全时）", "训练后恢复情况"],
+  "evidenceSources": [
+    { "sourceId": "WHO-ICOPE-MOBILITY", "citation": "WHO ICOPE: declining physical capacity—multimodal exercise including strength, balance, flexibility and aerobic components.", "verificationStatus": "verified" },
+    { "sourceId": "PMID-38875406", "citation": "Wang et al. Resistance exercise in bedridden adults aged 80 years and above. Medicine. 2024;103:e38412.", "verificationStatus": "verified" }
+  ],
+  "audienceContent": {
+    "therapist": "候选草案：根据功能等级与当日耐受选择床上活动、低负荷抗阻及功能任务，剂量和具体项目必须逐项审核。",
+    "caregiver": "未发布：治疗师签发前不得执行。",
+    "residentFamily": "未发布：当前仅为临床审核草案。"
+  },
+  "clinicalReview": { "status": "pending_clinical_review", "reviewerUserId": null, "reviewedAt": null }
+}
