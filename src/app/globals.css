@@ -28,6 +28,18 @@
 .resultGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
 .resultGrid article { display: grid; gap: .5rem; padding: 1.25rem; border: 1px solid #d7ddd6; border-radius: 14px; background: #fff; }
 .resultGrid span { color: #65716b; font-size: .9rem; }
+.prescriptionList { display: grid; gap: 1rem; margin: 2rem 0; }
+.prescriptionList h2 { margin: .25rem 0; font-size: 2rem; }
+.prescriptionCard { padding: 1.5rem; border: 1px solid #d7ddd6; border-radius: 16px; background: #fff; }
+.prescriptionHeader { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
+.prescriptionHeader span { color: #65716b; font-size: .85rem; }
+.prescriptionHeader h3 { margin: .35rem 0 1rem; font-size: 1.35rem; }
+.prescriptionHeader > strong, .draftLock { color: #9a6205; }
+.prescriptionCard dl { display: grid; grid-template-columns: 7rem 1fr; gap: .6rem 1rem; }
+.prescriptionCard dt { color: #65716b; }
+.prescriptionCard dd { margin: 0; }
+.prescriptionCard details { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e2e6e2; }
+.prescriptionCard summary { cursor: pointer; color: #075c46; font-weight: 800; }
 @media (max-width: 640px) { .assessmentShell { padding-inline: 1rem; } .resultGrid { grid-template-columns: 1fr; } }
 
 * { box-sizing: border-box; }

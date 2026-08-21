@@ -3,13 +3,16 @@ import test from "node:test";
 
 import { validateAssessmentInput } from "../../src/application/assessment-input.mjs";
 
-const valid = { caseAlias: "CASE-DEMO-01", ageBand: "75-84", modules: ["M01"] };
+const valid = { caseAlias: "CASE-DEMO-01", ageBand: "75-84", modules: ["M01"], functionalLevel: "F2", goalModes: ["M", "R"], assistanceLevel: "A2" };
 
 test("assessment intake identifies the first invalid field", () => {
   assert.equal(validateAssessmentInput({ ...valid, caseAlias: "张三" }), "caseAlias");
   assert.equal(validateAssessmentInput({ ...valid, ageBand: "" }), "ageBand");
   assert.equal(validateAssessmentInput({ ...valid, modules: [] }), "modules");
   assert.equal(validateAssessmentInput({ ...valid, modules: ["M99"] }), "modules");
+  assert.equal(validateAssessmentInput({ ...valid, functionalLevel: "F9" }), "functionalLevel");
+  assert.equal(validateAssessmentInput({ ...valid, goalModes: [] }), "goalModes");
+  assert.equal(validateAssessmentInput({ ...valid, assistanceLevel: "A9" }), "assistanceLevel");
 });
 
 test("assessment intake accepts one or more approved prototype modules", () => {

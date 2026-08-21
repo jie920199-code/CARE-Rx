@@ -25,17 +25,20 @@ export async function POST(request: Request) {
   const caseAlias = String(form.get("caseAlias") ?? "").trim().toUpperCase();
   const ageBand = String(form.get("ageBand") ?? "");
   const modules = [...new Set(form.getAll("modules").map(String))];
+  const functionalLevel = String(form.get("functionalLevel") ?? "");
+  const goalModes = [...new Set(form.getAll("goalModes").map(String))];
+  const assistanceLevel = String(form.get("assistanceLevel") ?? "");
   const safetyResponses = {
     acuteNeurologicalChange: String(form.get("acuteNeurologicalChange") ?? ""),
     medicalInstability: String(form.get("medicalInstability") ?? ""),
     newSevereSymptom: String(form.get("newSevereSymptom") ?? ""),
   };
-  const inputError = validateAssessmentInput({ caseAlias, ageBand, modules });
+  const inputError = validateAssessmentInput({ caseAlias, ageBand, modules, functionalLevel, goalModes, assistanceLevel });
   if (inputError) return redirectTo(request, `/assessment/new?error=${inputError}`);
   const safety = evaluateAssessmentSafety(safetyResponses);
   const sessionId = transientAssessmentStore.create({
     therapistUserId: therapist.therapistUserId,
-    patientPayload: { caseAlias, ageBand, modules, safetyResponses, safety },
+    patientPayload: { caseAlias, ageBand, modules, functionalLevel, goalModes, assistanceLevel, safetyResponses, safety },
   });
   return redirectTo(request, `/assessment/${encodeURIComponent(sessionId)}`);
 }
