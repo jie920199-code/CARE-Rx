@@ -3,8 +3,23 @@ import { useMemo, useState } from "react";
 
 type Prescription = any;
 const modules = [["M01", "长期卧床与废用"], ["M07", "慢性腰痛"], ["M08", "脑卒中运动功能障碍"]];
-const levels = ["F0", "F1", "F2", "F3", "F4", "F5"];
-const assistance = ["A0", "A1", "A2", "A3", "A4", "A5", "AX"];
+const levels = [
+  { id: "F0", name: "舒适照护级", description: "医学不稳定、终末期或无法主动参与。" },
+  { id: "F1", name: "完全卧床级", description: "翻身和坐起完全依赖。" },
+  { id: "F2", name: "床上活动级", description: "可以参与翻身或短时间坐起。" },
+  { id: "F3", name: "转移站立级", description: "能够坐位，需要辅助站立或转移。" },
+  { id: "F4", name: "辅助步行级", description: "可以在辅助或监护下行走。" },
+  { id: "F5", name: "独立活动级", description: "可以独立步行或完成主要活动。" },
+];
+const assistance = [
+  { id: "A0", name: "独立完成", description: "无需他人提示、监护或身体帮助。" },
+  { id: "A1", name: "提示或监护", description: "需要口头提示或近身监护，不提供身体助力。" },
+  { id: "A2", name: "一人轻度辅助", description: "一人提供少量身体帮助，老人完成主要部分。" },
+  { id: "A3", name: "一人中至最大辅助", description: "一人承担较多身体帮助，必须确认操作安全。" },
+  { id: "A4", name: "两人辅助", description: "需要两人共同完成并明确分工。" },
+  { id: "A5", name: "机械辅助", description: "需要移位机等机械设备及受训人员。" },
+  { id: "AX", name: "目前不宜实施", description: "当前条件下不执行该训练，需暂停并复核。" },
+];
 const goals = [["P", "预防"], ["M", "维持"], ["R", "恢复"], ["C", "代偿"], ["H", "舒适"]];
 
 export function MobileAssessment({ prescriptions, proposals }: { prescriptions: Prescription[]; proposals: Prescription[] }) {
@@ -13,13 +28,17 @@ export function MobileAssessment({ prescriptions, proposals }: { prescriptions: 
   const safetyStatus = safety.includes("yes") ? "blocked" : safety.includes("unknown") ? "incomplete" : "clear";
   const matches = useMemo(() => safetyStatus === "clear" ? prescriptions.filter((item) => item.status === "approved" && item.applicableModules.includes(moduleId) && item.applicableFunctionalLevels.includes(level)) : [], [prescriptions, moduleId, level, safetyStatus]);
   const proposalMatches = useMemo(() => safetyStatus === "clear" ? proposals.filter((item) => item.reviewStatus === "pending_clinical_review" && item.module === moduleId && item.applicableFunctionalLevels.includes(level) && item.goalModes.includes(goal)) : [], [proposals, moduleId, level, goal, safetyStatus]);
+  const selectedLevel = levels.find((item) => item.id === level)!;
+  const selectedAssistance = assistance.find((item) => item.id === assist)!;
   const reset = () => { setSubmitted(false); setConfirmed(false); };
   function updateSafety(index: number, value: string) { setSafety((current) => current.map((item, i) => i === index ? value : item)); reset(); }
 
   return <main><header><div className="brand">CR</div><div><strong>CARE-Rx</strong><span>移动查房评审</span></div><em>仅限虚构病例</em></header>
     <section className="hero"><p>CLINICAL DECISION SUPPORT</p><h1>功能分类后查看<br />批准处方</h1><div className="notice">不保存输入，不诊断疾病，不替代治疗师判断。禁止输入真实患者资料。</div></section>
     <section className="panel"><h2>1. 功能与目标分类</h2><label>核心问题<select value={moduleId} onChange={(e) => { setModuleId(e.target.value); reset(); }}>{modules.map(([id, label]) => <option key={id} value={id}>{id} · {label}</option>)}</select></label>
-      <div className="two"><label>功能等级<select value={level} onChange={(e) => { setLevel(e.target.value); reset(); }}>{levels.map(x => <option key={x}>{x}</option>)}</select></label><label>辅助等级<select value={assist} onChange={(e) => setAssist(e.target.value)}>{assistance.map(x => <option key={x}>{x}</option>)}</select></label></div>
+      <div className="two"><label>功能等级<select value={level} onChange={(e) => { setLevel(e.target.value); reset(); }}>{levels.map((item) => <option key={item.id} value={item.id}>{item.id} · {item.name}</option>)}</select></label><label>辅助等级<select value={assist} onChange={(e) => { setAssist(e.target.value); reset(); }}>{assistance.map((item) => <option key={item.id} value={item.id}>{item.id} · {item.name}</option>)}</select></label></div>
+      <div className="classification-summary" aria-live="polite"><article><span>当前功能等级</span><strong>{selectedLevel.id} · {selectedLevel.name}</strong><p>{selectedLevel.description}</p></article><article><span>当前辅助等级</span><strong>{selectedAssistance.id} · {selectedAssistance.name}</strong><p>{selectedAssistance.description}</p></article></div>
+      <details className="level-reference"><summary>查看全部功能与辅助等级说明</summary><div className="reference-columns"><section><h3>功能等级 F0–F5</h3>{levels.map((item) => <p className={item.id === level ? "selected-reference" : ""} key={item.id}><b>{item.id} · {item.name}</b><br />{item.description}</p>)}</section><section><h3>辅助等级 A0–AX</h3>{assistance.map((item) => <p className={item.id === assist ? "selected-reference" : ""} key={item.id}><b>{item.id} · {item.name}</b><br />{item.description}</p>)}</section></div></details>
       <label>目标模式<select value={goal} onChange={(e) => setGoal(e.target.value)}>{goals.map(([id, label]) => <option key={id} value={id}>{id} · {label}</option>)}</select></label></section>
     <section className="panel"><h2>2. 医疗安全门</h2>{["新发或突然加重的神经功能变化", "医学状态不稳定或活动未获准", "新发严重症状或近期重大变化"].map((label, index) => <fieldset key={label}><legend>{label}</legend><div className="segmented">{[["no", "否"], ["unknown", "不明确"], ["yes", "是"]].map(([value, text]) => <button type="button" className={safety[index] === value ? "active" : ""} onClick={() => updateSafety(index, value)} key={value}>{text}</button>)}</div></fieldset>)}<button className="primary" type="button" onClick={() => { setSubmitted(true); setConfirmed(false); }}>匹配处方</button></section>
     {submitted && safetyStatus === "blocked" && <section className="result danger"><h2>安全阻断：暂停并人工复核</h2><p>不得显示或执行处方。请按机构流程判断暂停、转诊或联系医生。</p></section>}
