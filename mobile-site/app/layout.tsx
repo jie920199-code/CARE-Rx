@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./review-zone.css";
 
 export const metadata: Metadata = { title: "CARE-Rx 移动查房评审", description: "养老机构功能康复评估与版本化处方临床决策支持原型" };
 
