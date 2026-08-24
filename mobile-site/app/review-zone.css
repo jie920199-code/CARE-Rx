@@ -1,0 +1,40 @@
+.review-zone {
+  border: 2px dashed #d5a84d;
+  background: #fffdf6;
+}
+
+.review-zone > p:not(.version) {
+  color: #655634;
+  line-height: 1.65;
+}
+
+.proposal-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.proposal-list article {
+  border: 1px solid #ead9b6;
+  border-radius: 14px;
+  padding: 16px;
+  background: #fff;
+}
+
+.proposal-list article > span {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 4px 9px;
+  background: #fff2d2;
+  color: #7d5500;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.proposal-list h3 { margin: 10px 0 6px; }
+.proposal-list p { margin: 0 0 10px; line-height: 1.55; }
+.proposal-list small { color: #776c57; line-height: 1.5; }
+
+@media print {
+  .review-zone { display: none; }
+}
