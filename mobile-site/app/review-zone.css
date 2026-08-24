@@ -34,6 +34,12 @@
 .proposal-list h3 { margin: 10px 0 6px; }
 .proposal-list p { margin: 0 0 10px; line-height: 1.55; }
 .proposal-list small { color: #776c57; line-height: 1.5; }
+.proposal-details { margin-top: 12px; border-top: 1px solid #ead9b6; padding-top: 6px; }
+.proposal-details summary { color: #7d5500; }
+.proposal-details h4 { margin: 18px 0 8px; font-size: 15px; }
+.proposal-details dl { grid-template-columns: 82px 1fr; font-size: 14px; }
+.proposal-details li { font-size: 14px; }
+.inheritance-notice { border-left: 3px solid #d5a84d; padding: 10px 12px; background: #fff8e8; }
 
 .classification-summary {
   display: grid;

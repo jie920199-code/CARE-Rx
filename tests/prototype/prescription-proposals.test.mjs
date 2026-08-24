@@ -34,3 +34,16 @@ test("focused variants cover the planned 3/4/4 library without replacing approve
   assert.equal(proposalCounts.M07.length + 1, 4);
   assert.equal(proposalCounts.M08.length + 1, 4);
 });
+
+test("mobile review renders inherited full fields without granting proposal confirmation", async () => {
+  const source = await readFile(join(process.cwd(), "mobile-site", "app", "mobile-assessment.tsx"), "utf8");
+
+  assert.match(source, /查看完整审核稿/);
+  assert.match(source, /剂量和安全条款继承已批准来源处方/);
+  assert.match(source, /parent\.contraindications/);
+  assert.match(source, /parent\.terminationCriteria/);
+  assert.match(source, /parent\.progressionCriteria/);
+  assert.match(source, /parent\.regressionCriteria/);
+  assert.match(source, /护工执行权限待独立审核/);
+  assert.doesNotMatch(source, /ProposalCard[\s\S]*治疗师确认本次处方[\s\S]*<\/article>/);
+});
