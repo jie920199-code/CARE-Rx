@@ -21,6 +21,15 @@ const assistance = [
   { id: "AX", name: "目前不宜实施", description: "当前条件下不执行该训练，需暂停并复核。" },
 ];
 const goals = [["P", "预防"], ["M", "维持"], ["R", "恢复"], ["C", "代偿"], ["H", "舒适"]];
+const feedbackTemplate = `CARE-Rx 公开评审反馈
+机构类型（不要填写机构名称）：
+测试模块：M01 / M07 / M08
+虚构病例功能等级：
+虚构病例辅助等级：
+目标模式：
+匹配结果是否合理：是 / 否 / 不确定
+发现的问题：错配 / 漏配 / 剂量 / 辅助等级 / 安全措辞 / 页面操作 / 其他
+具体建议（禁止包含真实患者信息）：`;
 
 function ProposalCard({ item, parent }: { item: Prescription; parent: Prescription }) {
   const focusedSteps = item.sourceSections
@@ -61,6 +70,7 @@ function ProposalCard({ item, parent }: { item: Prescription; parent: Prescripti
 export function MobileAssessment({ prescriptions, proposals }: { prescriptions: Prescription[]; proposals: Prescription[] }) {
   const [moduleId, setModuleId] = useState("M01"); const [level, setLevel] = useState("F2"); const [assist, setAssist] = useState("A2"); const [goal, setGoal] = useState("M");
   const [safety, setSafety] = useState(["unknown", "unknown", "unknown"]); const [submitted, setSubmitted] = useState(false); const [confirmedId, setConfirmedId] = useState<string | null>(null);
+  const [feedbackCopied, setFeedbackCopied] = useState(false);
   const safetyStatus = safety.includes("yes") ? "blocked" : safety.includes("unknown") ? "incomplete" : "clear";
   const matches = useMemo(() => safetyStatus === "clear" ? prescriptions.filter((item) => item.status === "approved" && item.clinicalReview?.status === "approved" && item.applicableModules.includes(moduleId) && item.applicableFunctionalLevels.includes(level) && (!item.goalModes || item.goalModes.includes(goal))) : [], [prescriptions, moduleId, level, goal, safetyStatus]);
   const proposalMatches = useMemo(() => safetyStatus === "clear" ? proposals.filter((item) => item.reviewStatus === "pending_clinical_review" && item.module === moduleId && item.applicableFunctionalLevels.includes(level) && item.goalModes.includes(goal)) : [], [proposals, moduleId, level, goal, safetyStatus]);
@@ -69,8 +79,8 @@ export function MobileAssessment({ prescriptions, proposals }: { prescriptions: 
   const reset = () => { setSubmitted(false); setConfirmedId(null); };
   function updateSafety(index: number, value: string) { setSafety((current) => current.map((item, i) => i === index ? value : item)); reset(); }
 
-  return <main><header><div className="brand">CR</div><div><strong>CARE-Rx</strong><span>移动查房评审</span></div><em>仅限虚构病例</em></header>
-    <section className="hero"><p>CLINICAL DECISION SUPPORT</p><h1>功能分类后查看<br />批准处方</h1><div className="notice">不保存输入，不诊断疾病，不替代治疗师判断。禁止输入真实患者资料。</div></section>
+  return <main><header><div className="brand">CR</div><div><strong>CARE-Rx</strong><span>移动查房评审</span></div><em>公开评审版</em></header>
+    <section className="hero"><p>CLINICAL DECISION SUPPORT</p><h1>功能分类后查看<br />批准处方</h1><div className="public-banner"><strong>面向养老机构治疗师公开测试</strong><span>仅使用虚构病例。不得输入姓名、病历、联系方式或其他可识别信息；匹配结果必须由测试治疗师独立判断，不得直接作为临床医嘱或交付护工执行。</span></div><div className="notice">页面不保存输入，不诊断疾病，不替代医生、康复医师或治疗师判断。</div></section>
     <section className="panel"><h2>1. 功能与目标分类</h2><label>核心问题<select value={moduleId} onChange={(e) => { setModuleId(e.target.value); reset(); }}>{modules.map(([id, label]) => <option key={id} value={id}>{id} · {label}</option>)}</select></label>
       <div className="two"><label>功能等级<select value={level} onChange={(e) => { setLevel(e.target.value); reset(); }}>{levels.map((item) => <option key={item.id} value={item.id}>{item.id} · {item.name}</option>)}</select></label><label>辅助等级<select value={assist} onChange={(e) => { setAssist(e.target.value); reset(); }}>{assistance.map((item) => <option key={item.id} value={item.id}>{item.id} · {item.name}</option>)}</select></label></div>
       <div className="classification-summary" aria-live="polite"><article><span>当前功能等级</span><strong>{selectedLevel.id} · {selectedLevel.name}</strong><p>{selectedLevel.description}</p></article><article><span>当前辅助等级</span><strong>{selectedAssistance.id} · {selectedAssistance.name}</strong><p>{selectedAssistance.description}</p></article></div>
@@ -82,5 +92,6 @@ export function MobileAssessment({ prescriptions, proposals }: { prescriptions: 
     {submitted && safetyStatus === "clear" && matches.length === 0 && <section className="result warning"><h2>没有适用处方</h2><p>当前模块与功能等级不匹配，不得越级或改用其他处方。</p></section>}
     {submitted && matches.map((rx) => <section className={`result prescription ${confirmedId === rx.prescriptionId ? "confirmed-prescription" : "unconfirmed-prescription"}`} key={rx.prescriptionId}><p className="version">正式处方 · {rx.prescriptionId} · {rx.version}</p>{rx.focusRole && <span className={`focus-badge ${rx.focusRole}`}>{rx.focusRole === "core" ? "核心方案" : rx.focusRole === "auxiliary" ? "辅助方案" : "替代方案"}</span>}<h2>{rx.trainingName}</h2>{rx.inheritance && <p className="source-note">临床条款继承：{rx.inheritance.sourcePrescriptionId} · {rx.inheritance.sourcePrescriptionVersion}</p>}<dl><dt>本次分类</dt><dd>{moduleId} · {selectedLevel.id}（{selectedLevel.name}）· {selectedAssistance.id}（{selectedAssistance.name}）· {goal}</dd><dt>适用等级</dt><dd>{rx.applicableFunctionalLevels.join("、")}</dd><dt>辅助范围</dt><dd>{rx.assistanceLevels.join("、")}</dd><dt>起始体位</dt><dd>{rx.startPosition}</dd><dt>剂量</dt><dd>{rx.dose.repetitions.value}；{rx.dose.sets.value}组；{rx.dose.duration.value}{rx.dose.duration.unit}；{rx.dose.frequency.value}；{rx.dose.intensity.value}</dd></dl><details><summary>查看步骤、替代方案与终止标准</summary><h3>训练步骤</h3><ol>{rx.steps.map((step: string) => <li key={step}>{step}</li>)}</ol><h3>替代训练</h3><ul>{rx.alternatives.map((item: string) => <li key={item}>{item}</li>)}</ul><h3>终止标准</h3><ul>{rx.terminationCriteria.map((item: any) => <li key={item.code}>{item.label}</li>)}</ul></details>{confirmedId !== rx.prescriptionId ? <button className="primary" type="button" onClick={() => setConfirmedId(rx.prescriptionId)}>治疗师确认本次处方</button> : <div className="confirmed"><strong>本次已确认</strong><button type="button" onClick={() => window.print()}>打印 / 另存 PDF</button></div>}</section>)}
     {submitted && safetyStatus === "clear" && proposalMatches.length > 0 && <section className="result review-zone"><p className="version">待临床审核 · 不可执行</p><h2>可进一步拆分的重点方案</h2><p>以下审核稿从已批准综合处方中拆分。可查看完整字段，但尚不能确认、打印或交给护工执行。</p><div className="proposal-list">{proposalMatches.map((item) => <ProposalCard key={item.prescriptionId} item={item} parent={prescriptions.find((rx) => rx.prescriptionId === item.sourcePrescriptionId)!} />)}</div></section>}
-    <footer>CARE-Rx 公开评审原型 · 数据仅存在于当前浏览器页面内存</footer></main>;
+    <section className="panel feedback-panel"><p className="version">ANONYMOUS REVIEW</p><h2>提交匿名测试反馈</h2><p>复制模板后通过 GitHub Issue 或发送给项目维护者。只描述虚构病例与系统表现，不要填写机构名称和患者信息。</p><pre>{feedbackTemplate}</pre><button className="secondary" type="button" onClick={async () => { await navigator.clipboard.writeText(feedbackTemplate); setFeedbackCopied(true); }}>{feedbackCopied ? "已复制反馈模板" : "复制匿名反馈模板"}</button><a href="https://github.com/jie920199-code/CARE-Rx/issues/new/choose" target="_blank" rel="noreferrer">前往 GitHub 提交反馈</a></section>
+    <footer>CARE-Rx 公开评审原型 · 数据仅存在于当前浏览器页面内存 · 禁止输入真实患者资料</footer></main>;
 }

@@ -45,6 +45,12 @@
 .focus-badge.auxiliary { background: #e8efff; color: #315a9b; }
 .focus-badge.alternative { background: #fff2d2; color: #7d5500; }
 .source-note { margin: -8px 0 16px; color: #64716a; font-size: 13px; }
+.public-banner { display: grid; gap: 7px; margin-bottom: 12px; border: 2px solid #a63327; border-radius: 14px; padding: 14px; background: #fff1ef; color: #78251d; line-height: 1.55; }
+.public-banner strong { font-size: 16px; }
+.feedback-panel > p { line-height: 1.65; }
+.feedback-panel pre { overflow-x: auto; white-space: pre-wrap; border: 1px solid #d6dfd9; border-radius: 12px; padding: 14px; background: #f7f9f6; font: 13px/1.65 "Microsoft YaHei", sans-serif; }
+.feedback-panel .secondary { width: 100%; border: 1px solid #0f644d; border-radius: 12px; padding: 13px; background: #fff; color: #0f644d; font: inherit; font-weight: 800; }
+.feedback-panel a { display: block; margin-top: 14px; text-align: center; color: #0f644d; font-weight: 800; }
 
 .classification-summary {
   display: grid;
@@ -85,5 +91,6 @@
 @media print {
   .review-zone,
   .level-reference,
+  .feedback-panel,
   .unconfirmed-prescription { display: none; }
 }
