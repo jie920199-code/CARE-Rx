@@ -40,6 +40,11 @@
 .proposal-details dl { grid-template-columns: 82px 1fr; font-size: 14px; }
 .proposal-details li { font-size: 14px; }
 .inheritance-notice { border-left: 3px solid #d5a84d; padding: 10px 12px; background: #fff8e8; }
+.focus-badge { display: inline-block; margin-bottom: 10px; border-radius: 999px; padding: 5px 10px; font-size: 12px; font-weight: 800; }
+.focus-badge.core { background: #dff2e6; color: #0f644d; }
+.focus-badge.auxiliary { background: #e8efff; color: #315a9b; }
+.focus-badge.alternative { background: #fff2d2; color: #7d5500; }
+.source-note { margin: -8px 0 16px; color: #64716a; font-size: 13px; }
 
 .classification-summary {
   display: grid;
@@ -79,5 +84,6 @@
 
 @media print {
   .review-zone,
-  .level-reference { display: none; }
+  .level-reference,
+  .unconfirmed-prescription { display: none; }
 }
