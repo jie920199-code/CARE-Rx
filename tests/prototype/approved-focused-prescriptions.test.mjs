@@ -11,7 +11,7 @@ test("therapist-approved focused prescriptions are immutable, audited and synced
 
   assert.deepEqual(mobile, canonical);
   assert.equal(canonical.version, "1.0.0");
-  assert.equal(canonical.status, "approved");
+  assert.equal(canonical.status, "approved_source_set");
   assert.equal(canonical.clinicalReview.status, "approved");
   assert.equal(canonical.clinicalReview.reviewerUserId, "therapist");
   assert.equal(canonical.prescriptions.length, 8);
@@ -23,6 +23,14 @@ test("therapist-approved focused prescriptions are immutable, audited and synced
     assert.ok(item.sourcePrescriptionId);
     assert.ok(item.stepIndexes.length > 0);
     assert.ok(["core", "auxiliary", "alternative"].includes(item.focusRole));
+
+    const fileName = `${item.prescriptionId}.approved.json`;
+    const fullCanonical = JSON.parse(await readFile(join(process.cwd(), "clinical-data", "prescriptions", fileName), "utf8"));
+    const fullMobile = JSON.parse(await readFile(join(process.cwd(), "mobile-site", "clinical-data", "prescriptions", fileName), "utf8"));
+    assert.deepEqual(fullMobile, fullCanonical);
+    assert.equal(fullCanonical.prescriptionId, item.prescriptionId);
+    assert.equal(fullCanonical.clinicalReview.status, "approved");
+    assert.equal(fullCanonical.inheritance.sourcePrescriptionVersion, "1.0.0");
   }
 });
 

@@ -1,0 +1,19 @@
+{
+  "reviewId": "REVIEW-RX-M01-BED-MOBILITY-FOCUS-1-0-0",
+  "contentType": "prescription",
+  "contentId": "RX-M01-BED-MOBILITY-FOCUS",
+  "contentVersion": "1.0.0",
+  "decision": "approved",
+  "checklist": {
+    "scopeCorrect": true,
+    "safetyCorrect": true,
+    "doseCorrectOrNotApplicable": true,
+    "evidenceVerified": true,
+    "wordingAppropriate": true,
+    "testsAdequate": true
+  },
+  "reviewerUserId": "therapist",
+  "reviewedAt": "2026-08-25T08:21:24+08:00",
+  "changeRequests": [],
+  "notes": "治疗师确认重点方案审核稿，批准继承 RX-M01-BED-MULTICOMPONENT 1.0.0 的剂量、辅助等级和安全条款并转为正式版本。"
+}

@@ -1,5 +1,5 @@
 {
-  "catalogId":"CARE-RX-FOCUSED-VARIANTS","version":"1.0.0","status":"approved","inheritancePolicy":"All unoverridden clinical fields inherit without modification from the approved source prescription version.",
+  "catalogId":"CARE-RX-FOCUSED-VARIANTS","version":"1.0.0","status":"approved_source_set","inheritancePolicy":"All unoverridden clinical fields inherit without modification from the approved source prescription version.",
   "clinicalReview":{"status":"approved","reviewerUserId":"therapist","reviewedAt":"2026-08-25T08:21:24+08:00","approvalBasis":"Therapist confirmation in CARE-Rx project review conversation"},
   "prescriptions":[
     {"prescriptionId":"RX-M01-BED-MOBILITY-FOCUS","version":"1.0.0","status":"approved","module":"M01","trainingName":"床上翻身与坐起重点方案","focusRole":"core","applicableFunctionalLevels":["F1","F2"],"goalModes":["P","M","R","C"],"sourcePrescriptionId":"RX-M01-BED-MULTICOMPONENT","sourcePrescriptionVersion":"1.0.0","stepIndexes":[3]},

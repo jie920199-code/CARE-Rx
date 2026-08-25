@@ -1,7 +1,7 @@
 {
   "catalogId": "CARE-RX-FOCUSED-VARIANTS",
   "version": "1.0.0",
-  "status": "approved",
+  "status": "approved_source_set",
   "inheritancePolicy": "All unoverridden clinical fields inherit without modification from the approved source prescription version.",
   "clinicalReview": {
     "status": "approved",
