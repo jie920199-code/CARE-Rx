@@ -34,7 +34,7 @@ test("therapist-approved focused prescriptions are immutable, audited and synced
   }
 });
 
-test("mobile runtime materializes inherited clinical fields and confirms only one prescription", async () => {
+test("mobile runtime filters by assistance and limits therapist combination selection", async () => {
   const page = await readFile(join(process.cwd(), "mobile-site", "app", "page.tsx"), "utf8");
   const assessment = await readFile(join(process.cwd(), "mobile-site", "app", "mobile-assessment.tsx"), "utf8");
   const styles = await readFile(join(process.cwd(), "mobile-site", "app", "review-zone.css"), "utf8");
@@ -43,6 +43,10 @@ test("mobile runtime materializes inherited clinical fields and confirms only on
   assert.match(page, /sourcePrescriptionVersion/);
   assert.match(page, /steps: variant\.stepIndexes/);
   assert.match(assessment, /item\.clinicalReview\?\.status === "approved"/);
-  assert.match(assessment, /confirmedId === rx\.prescriptionId/);
+  assert.match(assessment, /item\.assistanceLevels\.includes\(assist\)/);
+  assert.match(assessment, /\.slice\(0, 5\)/);
+  assert.match(assessment, /current\.length < 3/);
+  assert.match(assessment, /选择1～3个/);
+  assert.match(assessment, /剂量不得直接相加/);
   assert.match(styles, /\.unconfirmed-prescription/);
 });
