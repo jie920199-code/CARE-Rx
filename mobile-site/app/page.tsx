@@ -2,6 +2,7 @@ import m01 from "../clinical-data/prescriptions/RX-M01-BED-MULTICOMPONENT.approv
 import m07 from "../clinical-data/prescriptions/RX-M07-GRADED-ACTIVITY.approved.json";
 import m08 from "../clinical-data/prescriptions/RX-M08-TASK-PRACTICE.approved.json";
 import approvedFocusedVariants from "../clinical-data/prescriptions/focused-variants.v1.0.0.approved.json";
+import focusedVariantProposals from "../clinical-data/prescription-proposals/focused-variants.v0.1.0.json";
 import { MobileAssessment } from "./mobile-assessment";
 
 type Prescription = Record<string, any>;
@@ -29,5 +30,10 @@ const focusedPrescriptions = approvedFocusedVariants.prescriptions.map((variant)
 });
 
 export default function Home() {
-  return <MobileAssessment prescriptions={[...comprehensivePrescriptions, ...focusedPrescriptions]} proposals={[]} />;
+  const approvedIds = new Set(focusedPrescriptions.map((item) => item.prescriptionId));
+  const pendingProposals = focusedVariantProposals.proposals.filter(
+    (item) => !approvedIds.has(item.prescriptionId),
+  );
+
+  return <MobileAssessment prescriptions={[...comprehensivePrescriptions, ...focusedPrescriptions]} proposals={pendingProposals} />;
 }
